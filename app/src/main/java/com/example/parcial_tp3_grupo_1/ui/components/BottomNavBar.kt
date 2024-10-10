@@ -41,10 +41,13 @@ fun BottomNavBar(
             .shadow(8.dp)
             .background(Color(0xFFE6EBF3).copy(alpha = 0.5f))
     ) {
-        navItems.forEach { item ->
+        navItems.forEachIndexed { index , item ->
             NavigationBarItem(
-                selected = true,
-                onClick = item.action,
+                selected = selectedItem == index,
+                onClick = {
+                    selectedItem = index
+                    item.action()
+                },
                 colors = NavigationBarItemColors(
                     selectedIconColor = Color(0xFF53B175),
                     unselectedIconColor = Color(0xFF181725),
@@ -56,7 +59,7 @@ fun BottomNavBar(
                 ),
                 icon = {
                     Image(
-                        painter = painterResource(item.image),
+                        painter = painterResource(if (selectedItem == index) item.selectedImage else item.image),
                         contentDescription = item.title
                     )
                 }
