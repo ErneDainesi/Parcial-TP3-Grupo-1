@@ -8,7 +8,7 @@ object AppDestinations {
     const val CART_ROUTE = "cart"
     const val EXPLORE_ROUTE = "explore"
     const val FAVORITE_ROUTE = "favorite"
-    const val SHOP_ROUTE = "SHOP"
+    const val SHOP_ROUTE = "shop"
 }
 
 class MainNavActions(
