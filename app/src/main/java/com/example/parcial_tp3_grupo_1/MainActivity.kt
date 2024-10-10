@@ -9,8 +9,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
+import com.example.parcial_tp3_grupo_1.navigation.AppDestinations
+import com.example.parcial_tp3_grupo_1.navigation.MainNavActions
+import com.example.parcial_tp3_grupo_1.navigation.MainRouteNavGraph
+import com.example.parcial_tp3_grupo_1.ui.components.BottomNavBar
 import com.example.parcial_tp3_grupo_1.ui.theme.ParcialTP3Grupo1Theme
 
 class MainActivity : ComponentActivity() {
@@ -19,10 +25,22 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ParcialTP3Grupo1Theme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
+                val navController = rememberNavController()
+
+                val navigationActions = remember(navController) {
+                    MainNavActions(navController)
+                }
+                Scaffold(
+                    modifier = Modifier.fillMaxSize(),
+                    bottomBar = {
+                        BottomNavBar(navigationActions = navigationActions)
+                    }
+                ) { innerPadding ->
+                    MainRouteNavGraph(
+                        modifier = Modifier.padding(innerPadding),
+                        navController = navController,
+                        startDestination = AppDestinations.SHOP_ROUTE,
+                        navigationActions = navigationActions
                     )
                 }
             }
