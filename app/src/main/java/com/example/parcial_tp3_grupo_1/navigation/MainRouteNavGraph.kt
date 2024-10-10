@@ -30,5 +30,17 @@ fun MainRouteNavGraph(
             // Just for testing, here we need to add the Cart Route
             SignUpRoute(navigationActions = navigationActions)
         }
+        composable(route = AppDestinations.FAVORITE_ROUTE) {
+            // Just for testing, here we need to add the Cart Route
+            SignUpRoute(navigationActions = navigationActions)
+        }
+        composable(route = AppDestinations.ACCOUNT_ROUTE) {
+            // Just for testing, here we need to add the Cart Route
+            SignUpRoute(navigationActions = navigationActions)
+        }
+        composable(route = AppDestinations.EXPLORE_ROUTE) {
+            // Just for testing, here we need to add the Cart Route
+            SignUpRoute(navigationActions = navigationActions)
+        }
     }
 }
