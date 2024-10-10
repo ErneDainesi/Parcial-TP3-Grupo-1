@@ -52,7 +52,7 @@ fun SignInScreen(
     }
     Column (
         modifier = Modifier
-            .padding(10.dp)
+            .padding(20.dp)
             .fillMaxWidth()
     ) {
         Column (
