@@ -3,4 +3,8 @@
     <string name="welcome">Welcome to our store</string>
     <string name="abajo_welcome">Get your groceries in as fast as one hour</string>
     <string name="get_started">Get Started</string>
+    <string name="order_accepted">Your Order has been accepted</string>
+    <string name="on_its_way">Your items has been placed and is on it’s way to being processed</string>
+    <string name="track_order">Track Order</string>
+    <string name="back_home">Back to home</string>
 </resources>
