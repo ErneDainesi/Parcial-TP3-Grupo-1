@@ -24,6 +24,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Check
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExtendedFloatingActionButton
@@ -52,8 +55,8 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.parcial_tp3_grupo_1.R
+import com.example.parcial_tp3_grupo_1.navigation.MainNavActions
 import kotlinx.coroutines.delay
-
 
 
 @Composable
@@ -64,11 +67,13 @@ fun ProductCard(
     price: Double = 0.0,
     category: String = "",
     quantity: Int = 0,
-    onAddToCartClick: () -> Unit = { }
+    onAddToCartClick: () -> Unit = { },
+    navigationActions: MainNavActions
 ) {
 
 
-    Card(shape = RoundedCornerShape(16.dp),
+    Card(
+        shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(4.dp),
         modifier = Modifier
 //            .size(173.dp, 248.dp) Figma size
@@ -79,7 +84,8 @@ fun ProductCard(
                 shape = RoundedCornerShape(16.dp)
             ),
 
-        onClick = { /*redireccionar a Detalle del Producto*/ }) {
+        onClick = { /* redireccionar a detalle product */ }
+    ) {
 
         Column(
             verticalArrangement = Arrangement.Center,
@@ -141,12 +147,17 @@ fun ProductCard(
     }
 }
 
-@Preview
 @Composable
-fun AddedToCartFAB(show: Boolean = true) {
+fun AddedToCartFAB(
+    show: Boolean = true,
+    navigationActions: MainNavActions
+) {
     if (show) {
         ExtendedFloatingActionButton(
-            onClick = { /*Redireccionar al carrito*/ },
+            //No funciona no se porque
+            onClick = {
+                navigationActions.navigateToCart
+            },
             icon = {
                 Icon(
                     imageVector = Icons.Default.Check,
@@ -172,5 +183,6 @@ fun AddedToCartFAB(show: Boolean = true) {
             containerColor = colorResource(id = R.color.principal_button_color),
 
             )
+
     }
 }

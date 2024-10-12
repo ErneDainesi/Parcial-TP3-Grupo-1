@@ -55,26 +55,27 @@ class MainActivity : ComponentActivity() {
 
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
-                    floatingActionButton = { AddedToCartFAB(showFAB) },
+                    floatingActionButton = { AddedToCartFAB(showFAB, navigationActions = navigationActions)},
                     bottomBar = {
                         BottomNavBar(navigationActions = navigationActions)
                     }
                 )
                 { innerPadding ->
 //                    Descomentar para probar y despues borrar
-//                    Column {
-//                        Row {
-//                            ProductCard(
-//                                imageUrl = R.drawable.banana,
-//                                name = "Product Name",
-//                                description = "Product Description",
-//                                price = 4.99,
-//                                category = "ASD",
-//                                quantity = 10,
-//                                onAddToCartClick = { showFAB = true }
-//                            )
-//                        }
-//                    }
+                    Column {
+                        Row {
+                            ProductCard(
+                                imageUrl = R.drawable.banana,
+                                name = "Product Name",
+                                description = "Product Description",
+                                price = 4.99,
+                                category = "ASD",
+                                quantity = 10,
+                                onAddToCartClick = { showFAB = true },
+                                navigationActions = navigationActions
+                            )
+                        }
+                    }
 
                     MainRouteNavGraph(
                         modifier = Modifier.padding(innerPadding),

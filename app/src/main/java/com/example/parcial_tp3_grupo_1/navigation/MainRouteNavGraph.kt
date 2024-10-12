@@ -42,5 +42,11 @@ fun MainRouteNavGraph(
             // Just for testing, here we need to add the Cart Route
             SignUpRoute(navigationActions = navigationActions)
         }
+
+        //Ruta para detalle de producto
+        composable(route = AppDestinations.DETAIL_ROUTE) {
+            SignInRoute(navigationActions = navigationActions)
+        }
+
     }
 }

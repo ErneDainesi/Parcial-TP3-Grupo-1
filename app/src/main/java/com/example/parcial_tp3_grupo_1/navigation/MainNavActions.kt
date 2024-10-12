@@ -1,6 +1,7 @@
 package com.example.parcial_tp3_grupo_1.navigation
 
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 
 
 object AppDestinations {
@@ -9,6 +10,7 @@ object AppDestinations {
     const val EXPLORE_ROUTE = "explore"
     const val FAVORITE_ROUTE = "favorite"
     const val SHOP_ROUTE = "shop"
+    const val DETAIL_ROUTE = "detail/productId"
 }
 
 class MainNavActions(
@@ -29,4 +31,9 @@ class MainNavActions(
     val navigateToShop: () -> Unit = {
         navController.navigate(AppDestinations.SHOP_ROUTE)
     }
+//    val navigateToDetail: (productId: String) -> Unit = {
+//        val productId = it
+//        navController.navigate(AppDestinations.DETAIL_ROUTE.replace("{productId}", productId))
+//    }
+
 }
