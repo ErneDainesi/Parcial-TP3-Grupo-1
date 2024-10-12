@@ -1,4 +1,4 @@
-package com.example.parcial_tp3_grupo_1.data
+package com.example.parcial_tp3_grupo_1.navigation
 
 data class BottomNavItem(
     val title: String,
