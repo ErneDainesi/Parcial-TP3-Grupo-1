@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -20,12 +19,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import com.example.parcial_tp3_grupo_1.R
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -36,11 +35,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.parcial_tp3_grupo_1.navigation.MainNavActions
 import com.example.parcial_tp3_grupo_1.ui.components.BasicButton
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
+import kotlin.math.log
 
 @Composable
 fun SignInScreen(
     navigationActions: MainNavActions,
+    viewModel: SignInViewModel
 ) {
+    val coroutineScope = rememberCoroutineScope()
     var showPassword by remember {
         mutableStateOf(value = false)
     }
@@ -48,6 +52,9 @@ fun SignInScreen(
         mutableStateOf(value = "")
     }
     var email by remember {
+        mutableStateOf(value = "")
+    }
+    var loginError by remember {
         mutableStateOf(value = "")
     }
     Column (
@@ -86,6 +93,7 @@ fun SignInScreen(
         Spacer(modifier = Modifier.height(50.dp))
         Row {
             Column {
+                Text(text = loginError)
                 Text(
                     color = Color(0xFF7C7C7C),
                     text = "Email",
@@ -159,7 +167,16 @@ fun SignInScreen(
             Column (
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                BasicButton(text = "Sign In", onClick = {})
+                BasicButton(text = "Sign In", onClick = {
+                    coroutineScope.launch {
+                        val isValidLogin = viewModel.checkLogin(email, password)
+                        if (isValidLogin) {
+                            loginError = "TODO OK";
+                        } else {
+                            loginError = "ERROR LOQUITA";
+                        }
+                    }
+                })
                 Row {
                     TextButton(onClick = {}) {
                         Text(
