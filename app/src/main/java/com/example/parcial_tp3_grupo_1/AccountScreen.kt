@@ -13,10 +13,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Email
 import androidx.compose.material3.Button
-import androidx.compose.material3.Icon
+import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
@@ -24,14 +23,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.compose.rememberAsyncImagePainter
-import coil3.request.ImageRequest
-import coil3.svg.SvgDecoder
 
 @Composable
 fun AccountScreen(modifier: Modifier = Modifier) {
@@ -41,37 +37,35 @@ fun AccountScreen(modifier: Modifier = Modifier) {
             .background(Color.White)
     ) {
         Row(
-            modifier = modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Surface(
-                modifier = modifier.size(64.dp),
                 shape = CircleShape,
-                color = Color.Gray
+                modifier = Modifier
+                    .size(100.dp)
+                    .padding(16.dp),
+                color = Color(0xFFEFEFEF)
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.randomprofile),
+                    painter = painterResource(id = R.drawable.tp3profile),
                     contentDescription = "Random profile",
-                    modifier = modifier.size(64.dp)
                 )
             }
-            Spacer(modifier = modifier.width(16.dp))
+
             Column {
                 Text(text = "Afsar Hossen", fontSize = 20.sp, fontWeight = FontWeight.Bold)
                 Text(text = "lmshuvo97@gmail.com", fontSize = 14.sp, color = Color.Gray)
             }
         }
-        Spacer(modifier = modifier.size(24.dp))
-
-        AccountButton("Orders")
-        AccountButton("My Details")
-        AccountButton("Delivery Address")
-        AccountButton("Promo Card")
-        AccountButton("Notification")
-        AccountButton("Help")
+        AccountButton("Orders", R.drawable.orders_icon)
+        AccountButton("My Details", R.drawable.my_details_icon)
+        AccountButton("Delivery Address", R.drawable.delivery_address_icon)
+        AccountButton("Promo Card", R.drawable.promo_card_icon)
+        AccountButton("Notification", R.drawable.bell_icon)
+        AccountButton("Help", R.drawable.help_icon)
 
         Row(
-            modifier = modifier.fillMaxWidth(),
+            modifier = modifier.fillMaxWidth().padding(16.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -81,32 +75,58 @@ fun AccountScreen(modifier: Modifier = Modifier) {
                 onCheckedChange = { /*TODO*/ }
             )
         }
-        Spacer(modifier = modifier.height(24.dp))
-
-        Button(
-            onClick = { /*TODO*/ },
-            modifier = modifier.fillMaxWidth()
-        ) {
-            Text(text = "Log Out")
-        }
+        LogOutButton()
     }
 }
 
 @Composable
-private fun AccountButton(text: String, modifier: Modifier = Modifier) {
+private fun AccountButton(text: String, image: Int, modifier: Modifier = Modifier) {
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(vertical = 8.dp),
+            .padding(10.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        // TODO replace with bell icon
-        // Image(
-        //     painter = null,
-        //     contentDescription = "Bell svg icon",
-        //     modifier = modifier.size(24.dp)
-        // )
+        Image(
+            painter = painterResource(id = image),
+            contentDescription = text,
+            modifier = modifier.size(24.dp)
+        )
         Spacer(modifier = modifier.width(16.dp))
         Text(text = text, fontSize = 16.sp)
+    }
+}
+
+@Composable
+private fun LogOutButton(modifier: Modifier = Modifier) {
+    val lightGrayColor = 0xFFEFEFEF
+    val greenColor = 0xFF68A47B
+
+    Button(
+        onClick = { /*TODO*/ },
+        modifier = modifier
+            .padding(horizontal = 16.dp, vertical = 8.dp)
+            .fillMaxWidth(),
+        colors = ButtonColors(
+            containerColor = Color(lightGrayColor),
+            contentColor = Color(greenColor),
+            disabledContainerColor = Color(0xFFB0B0B0),
+            disabledContentColor = Color(0xFF808080)
+        ),
+        shape = ButtonDefaults.outlinedShape
+    ) {
+        Image(
+            painter = painterResource(id = R.drawable.logout_icon),
+            contentDescription = "Log out",
+            contentScale = ContentScale.Crop,
+            modifier = modifier.size(19.dp)
+        )
+        Spacer(modifier = modifier.width(16.dp))
+        Text(
+            text = "Log Out",
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color(greenColor)
+        )
     }
 }

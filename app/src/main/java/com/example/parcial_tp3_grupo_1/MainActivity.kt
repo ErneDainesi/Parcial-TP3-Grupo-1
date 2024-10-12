@@ -17,22 +17,32 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.parcial_tp3_grupo_1.ui.theme.ParcialTP3Grupo1Theme
 
 class MainActivity : ComponentActivity() {
-    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            ParcialTP3Grupo1Theme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    TopAppBar(
-                        title = {
-                            Text(text = "Account", fontWeight = FontWeight.Bold)
-                        },
+            AccountsManager()
+        }
+    }
+}
 
-                    )
-                    AccountScreen(modifier = Modifier.padding(innerPadding))
-                }
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun AccountsManager() {
+    ParcialTP3Grupo1Theme {
+        Scaffold(
+            topBar = {
+                TopAppBar(
+                    title = {
+                        Text(
+                            text = "Accounts",
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+                )
             }
+        ) { innerPadding ->
+            AccountScreen(modifier = Modifier.padding(innerPadding))
         }
     }
 }
@@ -41,6 +51,6 @@ class MainActivity : ComponentActivity() {
 @Preview (showBackground = true)
 fun AccountScreenPreview() {
     ParcialTP3Grupo1Theme {
-        AccountScreen()
+        AccountsManager()
     }
 }
