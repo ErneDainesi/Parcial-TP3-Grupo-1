@@ -54,9 +54,6 @@ fun SignInScreen(
     var email by remember {
         mutableStateOf(value = "")
     }
-    var loginError by remember {
-        mutableStateOf(value = "")
-    }
     Column (
         modifier = Modifier
             .padding(20.dp)
@@ -93,7 +90,6 @@ fun SignInScreen(
         Spacer(modifier = Modifier.height(50.dp))
         Row {
             Column {
-                Text(text = loginError)
                 Text(
                     color = Color(0xFF7C7C7C),
                     text = "Email",
@@ -171,9 +167,7 @@ fun SignInScreen(
                     coroutineScope.launch {
                         val isValidLogin = viewModel.checkLogin(email, password)
                         if (isValidLogin) {
-                            loginError = "TODO OK";
-                        } else {
-                            loginError = "ERROR LOQUITA";
+                            navigationActions.navigateToShop()
                         }
                     }
                 })
