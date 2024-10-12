@@ -172,7 +172,9 @@ fun SignInScreen(
                     }
                 })
                 Row {
-                    TextButton(onClick = {}) {
+                    TextButton(onClick = {
+                        navigationActions.navigateToSignUp()
+                    }) {
                         Text(
                             text = "Don't have an account?",
                             color = Color.Black
