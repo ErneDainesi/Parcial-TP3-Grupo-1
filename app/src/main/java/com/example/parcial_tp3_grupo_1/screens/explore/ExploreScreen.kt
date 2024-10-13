@@ -3,42 +3,70 @@
 package com.example.parcial_tp3_grupo_1.screens.explore
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.FlowRowScopeInstance.align
+import androidx.compose.foundation.layout.FlowColumnScopeInstance.align
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SearchBar
+import androidx.compose.material3.SearchBarColors
+import androidx.compose.material3.SearchBarDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.BiasAbsoluteAlignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.parcial_tp3_grupo_1.R
-import com.example.parcial_tp3_grupo_1.data.BottomNavItem
 import com.example.parcial_tp3_grupo_1.data.ExploreItem
 import com.example.parcial_tp3_grupo_1.navigation.MainNavActions
 
 
-
-val exploreItem = listOf(
-    ExploreItem( "Fresh Fruits & Vegetables", R.drawable.explore_frashFruitsAndVegetable ),
-    ExploreItem( "Cooking Oil & Ghee", R.drawable.explore_Oil_and_ghee ),
-    ExploreItem( "Meat & Fish", R.drawable.explore_meatAndFish ),
-    ExploreItem( "Bakery & Snacks", R.drawable.explore_bakeryAndSnacks ),
-    ExploreItem( "Dairy & Eggs", R.drawable.explore_dairyAndEggs ),
-    ExploreItem( "Beverages", R.drawable.explore_beverages ),
+val exploreItems = listOf(
+    ExploreItem( "Fresh Fruits & Vegetables", R.drawable.explore_fresh_fruits_and_vegetables, Color(83,177,117,26)),
+    ExploreItem( "Cooking Oil & Ghee", R.drawable.explore_cooking_oil_and_ghee,  Color(248,164,76,26)),
+    ExploreItem( "Meat & Fish", R.drawable.explore_meat_and_fish,  Color(247, 165, 147, 26)),
+    ExploreItem( "Bakery & Snacks", R.drawable.explore_bakery_and_snacks,  Color(211, 176, 224, 26)),
+    ExploreItem( "Dairy & Eggs", R.drawable.explore_dairy_and_eggs,  Color(253, 229, 152, 26)),
+    ExploreItem( "Beverages", R.drawable.explore_beverages,  Color(183, 223, 245, 26)),
+    ExploreItem( "Fresh Fruits & Vegetables", R.drawable.explore_fresh_fruits_and_vegetables, Color(83,177,117,26)),
+    ExploreItem( "Cooking Oil & Ghee", R.drawable.explore_cooking_oil_and_ghee,  Color(248,164,76,26)),
+    ExploreItem( "Meat & Fish", R.drawable.explore_meat_and_fish,  Color(247, 165, 147, 26)),
+    ExploreItem( "Bakery & Snacks", R.drawable.explore_bakery_and_snacks,  Color(211, 176, 224, 26)),
+    ExploreItem( "Dairy & Eggs", R.drawable.explore_dairy_and_eggs,  Color(253, 229, 152, 26)),
+    ExploreItem( "Beverages", R.drawable.explore_beverages,  Color(183, 223, 245, 26)),
 )
 
-
+@Preview
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun ExploreScreen(navigationActions: MainNavActions) {
@@ -46,8 +74,10 @@ fun ExploreScreen(navigationActions: MainNavActions) {
     var query by remember { mutableStateOf("") }
     var active by remember { mutableStateOf(false) }
 
-    Scaffold {
+
         SearchBar(
+
+            colors = SearchBarDefaults.colors(Color(242,243,242)),
             modifier = Modifier.fillMaxWidth(),
             query = query ,
             onQueryChange = {
@@ -95,10 +125,81 @@ fun ExploreScreen(navigationActions: MainNavActions) {
                 }
 
             }
-        ) {
+        ) { /*      TODO       */ }
 
+        ExploreGrid(exploreItems)
+}
+
+//@Preview
+@Composable
+fun ExploreGrid(exploreItems: List<ExploreItem> = listOf(
+    ExploreItem( "Fresh Fruits & Vegetables", R.drawable.explore_fresh_fruits_and_vegetables, Color(83,177,117,26)),
+    ExploreItem( "Cooking Oil & Ghee", R.drawable.explore_cooking_oil_and_ghee,  Color(248,164,76,26)),
+    ExploreItem( "Meat & Fish", R.drawable.explore_meat_and_fish,  Color(247, 165, 147, 26)),
+    ExploreItem( "Bakery & Snacks", R.drawable.explore_bakery_and_snacks,  Color(211, 176, 224, 26)),
+    ExploreItem( "Dairy & Eggs", R.drawable.explore_dairy_and_eggs,  Color(253, 229, 152, 26)),
+    ExploreItem( "Beverages", R.drawable.explore_beverages,  Color(183, 223, 245, 26)),
+)) {
+
+    Column(
+        modifier = Modifier
+            .padding(16.dp)
+            .verticalScroll(rememberScrollState())
+
+    ) {
+        exploreItems.chunked(2).forEach { rowItems ->
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceEvenly,
+                modifier = Modifier
+                    .padding(8.dp)
+                    .fillMaxWidth()
+            ){
+                rowItems.forEach { item ->
+                    ExploreCard(item)
+                }
+            }
         }
+    }
+}
+
+//      @Preview
+@Composable
+fun ExploreCard( item: ExploreItem =  ExploreItem( "Fresh Fruits & Vegetable", R.drawable.explore_fresh_fruits_and_vegetables,Color(83, 177, 177, 70) ) ) {
+
+    Column(
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier
+            .border(
+                width = 1.dp,
+                color = item.backgroundColor,
+                shape = RoundedCornerShape(16.dp)
+            )
+            .background(
+                color = item.backgroundColor,
+                shape = RoundedCornerShape(16.dp)
+            )
+            .padding(8.dp)
+            .size(130.dp, 160.dp)
+
+    ) {
+        Image(
+            painter = painterResource( item.image),
+            contentDescription = item.title,
+            modifier = Modifier
+                .size(100.dp)
+                .clip(RoundedCornerShape(8.dp)),
+            alignment = Alignment.CenterStart
+            )
+        Spacer(modifier = Modifier.height(8.dp))
+
+        Text(
+            textAlign = TextAlign.Center,
+            text = item.title,
+            fontSize = 16.sp
+        )
 
     }
-
 }
+
