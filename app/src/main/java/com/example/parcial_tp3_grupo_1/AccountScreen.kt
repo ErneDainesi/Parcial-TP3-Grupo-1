@@ -20,6 +20,10 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -64,17 +68,6 @@ fun AccountScreen(modifier: Modifier = Modifier) {
         AccountButton("Notification", R.drawable.bell_icon)
         AccountButton("Help", R.drawable.help_icon)
 
-        Row(
-            modifier = modifier.fillMaxWidth().padding(16.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Text(text = "Dark Mode", fontSize = 16.sp, color = Color.Black)
-            Switch(
-                checked = false,
-                onCheckedChange = { /*TODO*/ }
-            )
-        }
         LogOutButton()
     }
 }
@@ -127,6 +120,23 @@ private fun LogOutButton(modifier: Modifier = Modifier) {
             fontSize = 16.sp,
             fontWeight = FontWeight.Bold,
             color = Color(greenColor)
+        )
+    }
+}
+
+@Composable
+private fun DarkModeButton(modifier: Modifier = Modifier) {
+    var isDarkMode by remember { mutableStateOf(false) }
+
+    Row(
+        modifier = modifier.fillMaxWidth().padding(16.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(text = "Dark Mode", fontSize = 16.sp, color = Color.Black)
+        Switch(
+            checked = isDarkMode,
+            onCheckedChange = { isDarkMode = it },
         )
     }
 }
