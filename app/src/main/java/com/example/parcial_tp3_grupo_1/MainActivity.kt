@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.parcial_tp3_grupo_1.navigation.AppDestinations
 import com.example.parcial_tp3_grupo_1.navigation.MainNavActions
@@ -33,13 +34,16 @@ class MainActivity : ComponentActivity() {
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
                     bottomBar = {
-                        BottomNavBar(navigationActions = navigationActions)
+                        val currentLocation = navController.currentBackStackEntryAsState().value?.destination?.route
+                        if (!navigationActions.shouldHideBottombar(currentLocation)) {
+                            BottomNavBar(navigationActions = navigationActions)
+                        }
                     }
                 ) { innerPadding ->
                     MainRouteNavGraph(
                         modifier = Modifier.padding(innerPadding),
                         navController = navController,
-                        startDestination = AppDestinations.SHOP_ROUTE,
+                        startDestination = AppDestinations.SIGNIN_ROUTE,
                         navigationActions = navigationActions
                     )
                 }
