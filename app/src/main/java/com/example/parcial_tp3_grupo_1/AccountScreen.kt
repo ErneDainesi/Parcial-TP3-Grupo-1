@@ -53,7 +53,7 @@ fun AccountScreen(modifier: Modifier = Modifier) {
             }
 
             Column {
-                Text(text = "Afsar Hossen", fontSize = 20.sp, fontWeight = FontWeight.Bold)
+                Text(text = "Afsar Hossen", fontSize = 20.sp, fontWeight = FontWeight.Bold, color = Color.Black)
                 Text(text = "lmshuvo97@gmail.com", fontSize = 14.sp, color = Color.Gray)
             }
         }
@@ -69,7 +69,7 @@ fun AccountScreen(modifier: Modifier = Modifier) {
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(text = "Dark Mode", fontSize = 16.sp)
+            Text(text = "Dark Mode", fontSize = 16.sp, color = Color.Black)
             Switch(
                 checked = false,
                 onCheckedChange = { /*TODO*/ }
@@ -93,7 +93,7 @@ private fun AccountButton(text: String, image: Int, modifier: Modifier = Modifie
             modifier = modifier.size(24.dp)
         )
         Spacer(modifier = modifier.width(16.dp))
-        Text(text = text, fontSize = 16.sp)
+        Text(text = text, fontSize = 16.sp, color = Color.Black)
     }
 }
 
