@@ -18,7 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.parcial_tp3_grupo_1.R
-import com.example.parcial_tp3_grupo_1.data.BottomNavItem
+import com.example.parcial_tp3_grupo_1.navigation.BottomNavItem
 import com.example.parcial_tp3_grupo_1.navigation.MainNavActions
 
 @Composable
