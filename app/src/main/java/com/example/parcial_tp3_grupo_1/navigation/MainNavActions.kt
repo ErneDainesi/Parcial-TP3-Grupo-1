@@ -9,6 +9,7 @@ object AppDestinations {
     const val EXPLORE_ROUTE = "explore"
     const val FAVORITE_ROUTE = "favorite"
     const val SHOP_ROUTE = "shop"
+    const val CATEGORY_ROUTE = "category"
 }
 
 class MainNavActions(
@@ -28,5 +29,8 @@ class MainNavActions(
     }
     val navigateToShop: () -> Unit = {
         navController.navigate(AppDestinations.SHOP_ROUTE)
+    }
+    val navigateToCategory: () -> Unit = {
+        navController.navigate(AppDestinations.CATEGORY_ROUTE)
     }
 }
