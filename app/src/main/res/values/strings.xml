@@ -6,5 +6,20 @@
     <string name="order_accepted">Your Order has been accepted</string>
     <string name="on_its_way">Your items has been placed and is on it’s way to being processed</string>
     <string name="track_order">Track Order</string>
-    <string name="back_home">Back to home</string>
+    <string name="back_home">Back to home</string>Oops! Order Failed
+    <string name="order_failed">Oops! Order Failed</string>
+    <string name="smth_wrong">Something went terribly wrong.</string>Please Try Again
+    <string name="try_again">Please Try Again</string>
+    <string name="filters">Filters</string>Categories
+    <string name="categories">Categories</string>
+    <string name="eggs">Eggs</string>
+    <string name="noodles_pasta">Noodles and Pasta</string>
+    <string name="chips_crisps">Chips and Crisps</string>
+    <string name="fast_food">Fast Food</string>
+    <string name="brand">Brand</string>
+    <string name="individual_collection">Individual Collection</string>
+    <string name="cocola">Cocola</string>
+    <string name="ifad">Ifad</string>
+    <string name="kazi_farmas">Kazi Farmas</string>
+    <string name="apply_filter">Apply Filter</string>
 </resources>
