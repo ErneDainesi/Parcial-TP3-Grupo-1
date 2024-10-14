@@ -2,6 +2,7 @@ package com.example.parcial_tp3_grupo_1.screens.Account
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -15,16 +16,24 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.parcial_tp3_grupo_1.R
@@ -69,17 +78,7 @@ fun AccountScreen(
         AccountButton("Notification", R.drawable.bell_icon)
         AccountButton("Help", R.drawable.help_icon)
 
-        Row(
-            modifier = modifier.fillMaxWidth().padding(16.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Text(text = "Dark Mode", fontSize = 16.sp, color = Color.Black)
-            Switch(
-                checked = false,
-                onCheckedChange = { /*TODO*/ },
-            )
-        }
+        DarkModeButton()
         LogOutButton(navigationActions)
     }
 }
@@ -139,5 +138,29 @@ private fun LogOutButton(
             color = Color(greenColor),
             modifier = modifier.padding(start = 8.dp)
         )
+    }
+}
+
+@Composable
+fun DarkModeButton(modifier: Modifier = Modifier) {
+    val systemInDarkTheme = isSystemInDarkTheme()
+    var isDarkMode by remember { mutableStateOf(systemInDarkTheme) }
+
+    Row(
+        modifier = modifier.fillMaxWidth().padding(16.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(text = "Dark Mode", fontSize = 16.sp, color = Color.Black)
+        Switch(
+            checked = isDarkMode,
+            onCheckedChange = { isDarkMode = it },
+        )
+    }
+
+    MaterialTheme(
+        colorScheme = if (isDarkMode) darkColorScheme() else lightColorScheme()
+    ) {
+        Text("Current theme: ${if (isDarkMode) "Dark" else "Light"}")
     }
 }
