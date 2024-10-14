@@ -7,16 +7,15 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.parcial_tp3_grupo_1.navigation.AppDestinations
+import com.example.parcial_tp3_grupo_1.navigation.DynamicTopBar
 import com.example.parcial_tp3_grupo_1.navigation.MainNavActions
 import com.example.parcial_tp3_grupo_1.navigation.MainRouteNavGraph
+import com.example.parcial_tp3_grupo_1.screens.Account.AccountScreen
 import com.example.parcial_tp3_grupo_1.ui.components.BottomNavBar
 import com.example.parcial_tp3_grupo_1.ui.theme.ParcialTP3Grupo1Theme
 
@@ -38,6 +37,10 @@ class MainActivity : ComponentActivity() {
                         if (!navigationActions.shouldHideBottombar(currentLocation)) {
                             BottomNavBar(navigationActions = navigationActions)
                         }
+                    },
+                    topBar = {
+                        val currentLocation = navController.currentBackStackEntryAsState().value?.destination?.route
+                        DynamicTopBar(currentLocation)
                     }
                 ) { innerPadding ->
                     MainRouteNavGraph(
@@ -49,18 +52,5 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-    }
-}
-
-@Composable
-fun AccountScreen() {
-    AccountScreen()
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    ParcialTP3Grupo1Theme {
-        Greeting("Android")
     }
 }

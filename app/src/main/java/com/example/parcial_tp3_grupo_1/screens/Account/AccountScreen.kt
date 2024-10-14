@@ -1,4 +1,4 @@
-package com.example.parcial_tp3_grupo_1
+package com.example.parcial_tp3_grupo_1.screens.Account
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -28,9 +27,15 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.parcial_tp3_grupo_1.R
+import com.example.parcial_tp3_grupo_1.navigation.DynamicTopBar
+import com.example.parcial_tp3_grupo_1.navigation.MainNavActions
 
 @Composable
-fun AccountScreen(modifier: Modifier = Modifier) {
+fun AccountScreen(
+    navigationActions: MainNavActions,
+    modifier: Modifier = Modifier,
+) {
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -59,8 +64,8 @@ fun AccountScreen(modifier: Modifier = Modifier) {
         }
         AccountButton("Orders", R.drawable.orders_icon)
         AccountButton("My Details", R.drawable.my_details_icon)
-        AccountButton("Delivery Address", R.drawable.delivery_address_icon)
-        AccountButton("Promo Card", R.drawable.promo_card_icon)
+        AccountButton("Delivery Address", R.drawable.delivery_address)
+        AccountButton("Promo Card", R.drawable.payment_icon)
         AccountButton("Notification", R.drawable.bell_icon)
         AccountButton("Help", R.drawable.help_icon)
 
@@ -72,15 +77,19 @@ fun AccountScreen(modifier: Modifier = Modifier) {
             Text(text = "Dark Mode", fontSize = 16.sp, color = Color.Black)
             Switch(
                 checked = false,
-                onCheckedChange = { /*TODO*/ }
+                onCheckedChange = { /*TODO*/ },
             )
         }
-        LogOutButton()
+        LogOutButton(navigationActions)
     }
 }
 
 @Composable
-private fun AccountButton(text: String, image: Int, modifier: Modifier = Modifier) {
+private fun AccountButton(
+    text: String,
+    image: Int,
+    modifier: Modifier = Modifier
+) {
     Row(
         modifier = modifier
             .fillMaxWidth()
@@ -90,20 +99,22 @@ private fun AccountButton(text: String, image: Int, modifier: Modifier = Modifie
         Image(
             painter = painterResource(id = image),
             contentDescription = text,
-            modifier = modifier.size(24.dp)
+            modifier = modifier.size(24.dp).padding(end = 8.dp)
         )
-        Spacer(modifier = modifier.width(16.dp))
         Text(text = text, fontSize = 16.sp, color = Color.Black)
     }
 }
 
 @Composable
-private fun LogOutButton(modifier: Modifier = Modifier) {
+private fun LogOutButton(
+    navigationActions: MainNavActions,
+    modifier: Modifier = Modifier,
+) {
     val lightGrayColor = 0xFFEFEFEF
     val greenColor = 0xFF68A47B
 
     Button(
-        onClick = { /*TODO*/ },
+        onClick = { navigationActions.navigateToSignIn() },
         modifier = modifier
             .padding(horizontal = 16.dp, vertical = 8.dp)
             .fillMaxWidth(),
@@ -116,17 +127,17 @@ private fun LogOutButton(modifier: Modifier = Modifier) {
         shape = ButtonDefaults.outlinedShape
     ) {
         Image(
-            painter = painterResource(id = R.drawable.logout_icon),
+            painter = painterResource(id = R.drawable.log_out),
             contentDescription = "Log out",
             contentScale = ContentScale.Crop,
             modifier = modifier.size(19.dp)
         )
-        Spacer(modifier = modifier.width(16.dp))
         Text(
             text = "Log Out",
             fontSize = 16.sp,
             fontWeight = FontWeight.Bold,
-            color = Color(greenColor)
+            color = Color(greenColor),
+            modifier = modifier.padding(start = 8.dp)
         )
     }
 }
