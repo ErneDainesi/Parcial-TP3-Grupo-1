@@ -23,7 +23,7 @@ object TopBar  {
     const val SEARCH_SCREEN = "Search"
 }
 
-val hideTopBar = listOf(
+val showTopBar = listOf(
     TopBar.HOME_SCREEN,
     TopBar.EXPLORE_SCREEN,
     TopBar.CART_SCREEN,
@@ -39,7 +39,7 @@ val hideTopBar = listOf(
 fun DynamicTopBar(
     location: String?,
 ) {
-    if (location != null && topBarShouldAppear(location)) {
+    if (topBarShouldHide(location) && location != null) {
         TopAppBar(
             colors = TopAppBarDefaults.topAppBarColors(
                 containerColor = Color.White,
@@ -58,8 +58,8 @@ fun DynamicTopBar(
 }
 
 @Composable
-fun topBarShouldAppear(location: String): Boolean {
-    return !hideTopBar.contains(location)
+fun topBarShouldHide(location: String?): Boolean {
+    return !showTopBar.contains(location)
 }
 
 @Composable

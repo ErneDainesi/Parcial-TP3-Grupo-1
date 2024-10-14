@@ -49,10 +49,10 @@ fun SignInScreen(
         mutableStateOf(value = false)
     }
     var password by remember {
-        mutableStateOf(value = "")
+        mutableStateOf(value = "ewedon")
     }
     var email by remember {
-        mutableStateOf(value = "")
+        mutableStateOf(value = "don@gmail.com")
     }
     Column (
         modifier = Modifier
