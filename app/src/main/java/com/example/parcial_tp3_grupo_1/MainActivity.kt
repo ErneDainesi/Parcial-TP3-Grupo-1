@@ -5,11 +5,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -21,14 +18,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
 import com.example.parcial_tp3_grupo_1.navigation.AppDestinations
 import com.example.parcial_tp3_grupo_1.navigation.MainNavActions
 import com.example.parcial_tp3_grupo_1.navigation.MainRouteNavGraph
 import com.example.parcial_tp3_grupo_1.ui.components.AddedToCartFAB
 import com.example.parcial_tp3_grupo_1.ui.components.BottomNavBar
-import com.example.parcial_tp3_grupo_1.ui.components.ProductCard
 import com.example.parcial_tp3_grupo_1.ui.theme.ParcialTP3Grupo1Theme
 import kotlinx.coroutines.delay
 
@@ -65,21 +60,7 @@ class MainActivity : ComponentActivity() {
                     }
                 )
                 { innerPadding ->
-//                    Descomentar para probar y despues borrar
-//                    Column {
-//                        Row {
-//                            ProductCard(
-//                                imageUrl = R.drawable.banana,
-//                                name = "Product Name",
-//                                description = "Product Description",
-//                                price = 4.99,
-//                                category = "ASD",
-//                                quantity = 10,
-//                                onAddToCartClick = { showFAB = true },
-//                                navigationActions = navigationActions
-//                            )
-//                        }
-//                    }
+
 
                     MainRouteNavGraph(
                         modifier = Modifier.padding(innerPadding),

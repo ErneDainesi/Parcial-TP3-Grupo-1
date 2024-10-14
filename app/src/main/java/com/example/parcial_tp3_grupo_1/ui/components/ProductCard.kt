@@ -56,18 +56,14 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.parcial_tp3_grupo_1.R
+import com.example.parcial_tp3_grupo_1.model.Product
 import com.example.parcial_tp3_grupo_1.navigation.MainNavActions
 import kotlinx.coroutines.delay
 
 
 @Composable
 fun ProductCard(
-    imageUrl: Int = R.drawable.banana,
-    name: String = "",
-    description: String = "",
-    price: Double = 0.0,
-    category: String = "",
-    quantity: Int = 0,
+    product: Product,
     onAddToCartClick: () -> Unit = { },
     navigationActions: MainNavActions
 ) {
@@ -98,9 +94,9 @@ fun ProductCard(
                 .size(175.dp, 250.dp)
         ) {
             Image(
-//                cambiar por imageUrl
-                painter = painterResource(id = imageUrl),
-                contentDescription = name,
+//                cambiar por imagen de producto
+                painter = painterResource(id = R.drawable.banana),
+                contentDescription = product.title,
                 modifier = Modifier
                     .size(100.dp)
                     .clip(RoundedCornerShape(8.dp)),
@@ -108,15 +104,20 @@ fun ProductCard(
 
                 )
             Spacer(modifier = Modifier.height(8.dp))
-            Text(text = name, fontSize = 18.sp, fontWeight = FontWeight.Bold, color = Color.Black)
-            Text(text = description, fontSize = 16.sp, color = Color.Gray)
+            Text(
+                text = product.title,
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.Black
+            )
+            Text(text = product.description, fontSize = 16.sp, color = Color.Gray)
             Spacer(modifier = Modifier.height(8.dp))
             Row(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Text(
-                    text = "$$price",
+                    text = "$${product.price}",
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.Black
@@ -155,10 +156,7 @@ fun AddedToCartFAB(
 ) {
     if (show) {
         ExtendedFloatingActionButton(
-            //No funciona no se porque
-            onClick = {
-                navigationActions.navigateToCart
-            },
+            onClick = navigationActions.navigateToCart,
             icon = {
                 Icon(
                     imageVector = Icons.Default.Check,
