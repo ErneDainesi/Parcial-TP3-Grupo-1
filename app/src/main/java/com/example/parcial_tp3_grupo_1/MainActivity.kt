@@ -73,27 +73,6 @@ class MainActivity : ComponentActivity() {
                     }
                 )
                 { innerPadding ->
-//                    Column(
-//                        modifier = Modifier.padding(innerPadding),
-//                        verticalArrangement = Arrangement.Center,
-//                        horizontalAlignment = Alignment.CenterHorizontally
-//                    ) {
-//                        ProductCard(
-//                            product = Product(
-//                                id = 1,
-//                                title = "Producto 1",
-//                                description = "Descripcion del producto 1",
-//                                price = 100.0,
-//                                image = "https://picsum.photos/200/300",
-//                                category = "Categoria 1",
-//                                rating = Rating(4.5, 100),
-//                            ),
-//                            navigationActions = navigationActions,
-//                            onAddToCartClick = {
-//                                showFAB = true
-//                            }
-//                        )
-//                    }
 
                     MainRouteNavGraph(
                         modifier = Modifier.padding(innerPadding),

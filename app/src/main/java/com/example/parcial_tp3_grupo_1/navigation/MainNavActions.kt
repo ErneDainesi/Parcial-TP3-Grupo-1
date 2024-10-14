@@ -41,7 +41,7 @@ class MainNavActions(
         navController.navigate(AppDestinations.SIGNUP_ROUTE)
     }
     val navigateToProductDetail: (id: Int) -> Unit = { id ->
-        navController.navigate("${AppDestinations.PROD_DETAIL_ROUTE}$id")
+        navController.navigate(AppDestinations.PROD_DETAIL_ROUTE + id)
     }
 
     fun shouldHideBottombar(location: String?): Boolean {
