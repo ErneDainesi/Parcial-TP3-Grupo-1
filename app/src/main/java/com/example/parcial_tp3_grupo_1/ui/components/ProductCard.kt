@@ -81,7 +81,9 @@ fun ProductCard(
                 shape = RoundedCornerShape(16.dp)
             ),
 
-        onClick = { /* redireccionar a detalle product */ }
+        onClick = { /* redireccionar a detalle product */
+            navigationActions.navigateToProductDetail(product.id)
+        }
     ) {
 
         Column(

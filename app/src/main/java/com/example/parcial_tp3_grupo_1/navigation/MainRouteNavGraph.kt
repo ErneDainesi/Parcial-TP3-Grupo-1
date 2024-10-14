@@ -5,8 +5,12 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import com.example.parcial_tp3_grupo_1.screens.product.ProductDetailRoute
+import com.example.parcial_tp3_grupo_1.screens.product.ProductDetailScreen
 import com.example.parcial_tp3_grupo_1.screens.signin.SignInRoute
 import com.example.parcial_tp3_grupo_1.screens.signup.SignUpRoute
 
@@ -47,6 +51,15 @@ fun MainRouteNavGraph(
         }
         composable(route = AppDestinations.SIGNUP_ROUTE) {
             SignUpRoute(navigationActions = navigationActions)
+        }
+        composable(
+            route = AppDestinations.PROD_DETAIL_ROUTE,
+            arguments = listOf(navArgument("id") { type = NavType.IntType })
+        ) { backStackEntry ->
+            val productId = backStackEntry.arguments?.getInt("id")
+            productId?.let {
+                ProductDetailRoute(productId = productId, navigationActions = navigationActions)
+            }
         }
     }
 }
