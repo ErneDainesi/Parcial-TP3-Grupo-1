@@ -13,5 +13,5 @@ fun SignInRoute(
         SnackbarHostState()
     }
 ) {
-    SignInScreen(navigationActions)
+    SignInScreen(navigationActions, SignInViewModel())
 }

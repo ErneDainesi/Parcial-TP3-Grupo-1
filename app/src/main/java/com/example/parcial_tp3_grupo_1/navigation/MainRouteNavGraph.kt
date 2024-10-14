@@ -14,7 +14,7 @@ import com.example.parcial_tp3_grupo_1.screens.signup.SignUpRoute
 fun MainRouteNavGraph(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
-    startDestination: String = AppDestinations.SHOP_ROUTE,
+    startDestination: String = AppDestinations.SIGNIN_ROUTE,
     navigationActions: MainNavActions
 ) {
     NavHost(
@@ -42,11 +42,11 @@ fun MainRouteNavGraph(
             // Just for testing, here we need to add the Cart Route
             SignUpRoute(navigationActions = navigationActions)
         }
-
-        //Ruta para detalle de producto
-        composable(route = AppDestinations.DETAIL_ROUTE) {
+        composable(route = AppDestinations.SIGNIN_ROUTE) {
             SignInRoute(navigationActions = navigationActions)
         }
-
+        composable(route = AppDestinations.SIGNUP_ROUTE) {
+            SignUpRoute(navigationActions = navigationActions)
+        }
     }
 }

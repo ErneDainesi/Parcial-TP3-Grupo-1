@@ -20,6 +20,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
 import com.example.parcial_tp3_grupo_1.navigation.AppDestinations
@@ -57,7 +58,10 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     floatingActionButton = { AddedToCartFAB(showFAB, navigationActions = navigationActions)},
                     bottomBar = {
-                        BottomNavBar(navigationActions = navigationActions)
+                        val currentLocation = navController.currentBackStackEntryAsState().value?.destination?.route
+                        if (!navigationActions.shouldHideBottombar(currentLocation)) {
+                            BottomNavBar(navigationActions = navigationActions)
+                        }
                     }
                 )
                 { innerPadding ->

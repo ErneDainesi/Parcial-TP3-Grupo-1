@@ -1,8 +1,6 @@
 package com.example.parcial_tp3_grupo_1.navigation
 
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
-
 
 object AppDestinations {
     const val ACCOUNT_ROUTE = "account"
@@ -10,12 +8,16 @@ object AppDestinations {
     const val EXPLORE_ROUTE = "explore"
     const val FAVORITE_ROUTE = "favorite"
     const val SHOP_ROUTE = "shop"
-    const val DETAIL_ROUTE = "detail/productId"
+    const val SIGNIN_ROUTE = "signin"
+    const val SIGNUP_ROUTE = "signup"
 }
+
+val hideBottomBar = listOf(AppDestinations.SIGNUP_ROUTE, AppDestinations.SIGNIN_ROUTE)
 
 class MainNavActions(
     navController: NavHostController,
 ) {
+
     val navigateToAccount: () -> Unit = {
         navController.navigate(AppDestinations.ACCOUNT_ROUTE)
     }
@@ -31,9 +33,14 @@ class MainNavActions(
     val navigateToShop: () -> Unit = {
         navController.navigate(AppDestinations.SHOP_ROUTE)
     }
-//    val navigateToDetail: (productId: String) -> Unit = {
-//        val productId = it
-//        navController.navigate(AppDestinations.DETAIL_ROUTE.replace("{productId}", productId))
-//    }
+    val navigateToSignIn: () -> Unit = {
+        navController.navigate(AppDestinations.SIGNIN_ROUTE)
+    }
+    val navigateToSignUp: () -> Unit = {
+        navController.navigate(AppDestinations.SIGNUP_ROUTE)
+    }
 
+    fun shouldHideBottombar(location: String?): Boolean {
+        return hideBottomBar.contains(location)
+    }
 }
