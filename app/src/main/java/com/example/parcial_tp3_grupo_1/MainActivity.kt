@@ -6,14 +6,17 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
+import com.example.parcial_tp3_grupo_1.navigation.AppDestinations
+import com.example.parcial_tp3_grupo_1.navigation.DynamicTopBar
+import com.example.parcial_tp3_grupo_1.navigation.MainNavActions
+import com.example.parcial_tp3_grupo_1.navigation.MainRouteNavGraph
+import com.example.parcial_tp3_grupo_1.screens.Account.AccountScreen
+import com.example.parcial_tp3_grupo_1.ui.components.BottomNavBar
 import com.example.parcial_tp3_grupo_1.ui.theme.ParcialTP3Grupo1Theme
 
 class MainActivity : ComponentActivity() {
@@ -21,36 +24,33 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            AccountsManager()
-        }
-    }
-}
+            ParcialTP3Grupo1Theme {
+                val navController = rememberNavController()
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun AccountsManager() {
-    ParcialTP3Grupo1Theme {
-        Scaffold(
-            topBar = {
-                TopAppBar(
-                    title = {
-                        Text(
-                            text = "Accounts",
-                            fontWeight = FontWeight.Bold
-                        )
+                val navigationActions = remember(navController) {
+                    MainNavActions(navController)
+                }
+                Scaffold(
+                    modifier = Modifier.fillMaxSize(),
+                    bottomBar = {
+                        val currentLocation = navController.currentBackStackEntryAsState().value?.destination?.route
+                        if (!navigationActions.shouldHideBottombar(currentLocation)) {
+                            BottomNavBar(navigationActions = navigationActions)
+                        }
+                    },
+                    topBar = {
+                        val currentLocation = navController.currentBackStackEntryAsState().value?.destination?.route
+                        DynamicTopBar(currentLocation)
                     }
-                )
+                ) { innerPadding ->
+                    MainRouteNavGraph(
+                        modifier = Modifier.padding(innerPadding),
+                        navController = navController,
+                        startDestination = AppDestinations.SIGNIN_ROUTE,
+                        navigationActions = navigationActions
+                    )
+                }
             }
-        ) { innerPadding ->
-            AccountScreen(modifier = Modifier.padding(innerPadding))
         }
-    }
-}
-
-@Composable
-@Preview (showBackground = true)
-fun AccountScreenPreview() {
-    ParcialTP3Grupo1Theme {
-        AccountsManager()
     }
 }
