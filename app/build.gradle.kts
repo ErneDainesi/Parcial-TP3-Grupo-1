@@ -62,6 +62,7 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
+    implementation(libs.androidx.constraintlayout)
     testImplementation(libs.junit)
     implementation(libs.coil.kt.coil.compose)
     androidTestImplementation(libs.androidx.junit)
