@@ -18,7 +18,7 @@ fun ProductDetailRoute(
     val service = FakeStoreService(FakeStoreHelper())
     ProductDetailScreen(
         productId = productId,
-//        navigationActions = navigationActions,
+        navigationActions = navigationActions,
         viewModel = ProductDetailViewModel(service)
     )
 }

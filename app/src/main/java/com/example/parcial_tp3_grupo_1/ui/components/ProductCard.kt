@@ -63,14 +63,9 @@ import kotlinx.coroutines.delay
 
 @Composable
 fun ProductCard(
-    product: Product,
-    onAddToCartClick: () -> Unit,
-    navigationActions: MainNavActions
+    product: Product, onAddToCartClick: () -> Unit, navigationActions: MainNavActions
 ) {
-
-
-    Card(
-        shape = RoundedCornerShape(16.dp),
+    Card(shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(4.dp),
         modifier = Modifier
 //            .size(173.dp, 248.dp) Figma size
@@ -80,10 +75,8 @@ fun ProductCard(
                 color = colorResource(id = R.color.border_item_card_color),
                 shape = RoundedCornerShape(16.dp)
             ),
+        onClick = { navigationActions.navigateToProductDetail(product.id) }
 
-        onClick = { /* agregar redireccion valida */
-            navigationActions.navigateToProductDetail()
-        }
     ) {
 
         Column(
@@ -153,8 +146,7 @@ fun ProductCard(
 
 @Composable
 fun AddedToCartFAB(
-    show: Boolean = true,
-    navigationActions: MainNavActions
+    show: Boolean = true, navigationActions: MainNavActions
 ) {
     if (show) {
         ExtendedFloatingActionButton(

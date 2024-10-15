@@ -52,17 +52,19 @@ fun MainRouteNavGraph(
         composable(route = AppDestinations.SIGNUP_ROUTE) {
             SignUpRoute(navigationActions = navigationActions)
         }
-        composable(route = AppDestinations.PROD_DETAIL_ROUTE){
+        composable(route = AppDestinations.PROD_DETAIL_ROUTE) {
             ProductDetailRoute(productId = 1, navigationActions = navigationActions)
         }
-//        composable(
-//            route = AppDestinations.PROD_DETAIL_ROUTE,
-//            arguments = listOf(navArgument("id") { type = NavType.IntType })
-//        ) { backStackEntry ->
-//            val productId = backStackEntry.arguments?.getInt("id")
-//            productId?.let {
-//                ProductDetailRoute(productId = productId, navigationActions = navigationActions)
-//            }
-//        }
+        composable(
+            route = AppDestinations.PROD_DETAIL_ROUTE
+        ) { backStackEntry ->
+            val productId = backStackEntry.arguments?.getString("id")
+            productId?.let {
+                ProductDetailRoute(
+                    productId = productId.toInt(),
+                    navigationActions = navigationActions
+                )
+            }
+        }
     }
 }

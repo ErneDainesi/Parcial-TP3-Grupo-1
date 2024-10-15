@@ -1,5 +1,6 @@
 package com.example.parcial_tp3_grupo_1.screens.product
 
+import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.foundation.Image
@@ -55,6 +56,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
+import coil3.compose.SubcomposeAsyncImage
 import coil3.compose.rememberAsyncImagePainter
 import coil3.request.ImageRequest
 import coil3.request.crossfade
@@ -69,8 +71,8 @@ import org.jetbrains.annotations.Async
 
 @Composable
 fun ProductDetailScreen(
-    productId: Int = 1,
-//    navigationActions: MainNavActions,
+    productId: Int,
+    navigationActions: MainNavActions,
     viewModel: ProductDetailViewModel = ProductDetailViewModel(FakeStoreService(FakeStoreHelper()))
 ) {
 
@@ -92,12 +94,14 @@ fun ProductDetailScreen(
         }
 
         product != null -> {
-            Text(text = "asd")
-            ProductDetailView()
+            ProductDetailView(product = product!!, navigationActions = navigationActions)
         }
 
         else -> {
-            Text(text = "No se encontró el producto")
+            Column{
+                Text(text = productId.toString())
+                Text(text = "No se encontró el producto")
+            }
         }
 
 
@@ -106,122 +110,115 @@ fun ProductDetailScreen(
 
 }
 
-@Preview(showBackground = true)
 @Composable
 fun ProductDetailView(
-    product: Product = Product(
-        id = 1,
-        title = "Banana",
-        description = "Banana description",
-        price = 15.5,
-        category = "Fruit",
-        image = R.drawable.banana.toString(),
-        rating = Rating(4.5, 100)
-    )
+    product: Product, navigationActions: MainNavActions
 ) {
-    Column(modifier = Modifier.fillMaxSize()) {
+    LazyColumn(modifier = Modifier.fillMaxSize()) {
 //        No renderiza la imagen web
 //        AsyncImage(
-//            model = product.image,
+//            model = "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
 //            contentDescription = product.title,
 //            modifier = Modifier
 //                .fillMaxWidth()
 //                .height(200.dp),
 //        )
-        Image(
-            painter = painterResource(id = R.drawable.banana),
-            contentDescription = product.image,
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(200.dp),
-        )
+        item{
+            Image(
+                painter = painterResource(id = R.drawable.banana),
+                contentDescription = product.image,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(200.dp),
+            )
 
-        Spacer(modifier = Modifier.height(16.dp))
-        Column(
-            modifier = Modifier.padding(16.dp),
-        ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
+            Spacer(modifier = Modifier.height(16.dp))
+            Column(
+                modifier = Modifier.padding(16.dp),
             ) {
-                Column {
-                    Text(
-                        text = product.title,
-                        style = MaterialTheme.typography.headlineLarge,
-                        fontWeight = FontWeight.Bold,
-                        modifier = Modifier.padding(vertical = 8.dp)
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Column {
+                        Text(
+                            text = product.title,
+                            style = MaterialTheme.typography.headlineLarge,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier.padding(vertical = 8.dp)
+                        )
+                        Text(text = product.category)
+                    }
+
+                    Icon(
+                        imageVector = Icons.Default.FavoriteBorder,
+                        contentDescription = "Favorite",
+                        tint = Color.Gray
                     )
-                    Text(text = product.category)
+
                 }
-
-                Icon(
-                    imageVector = Icons.Default.FavoriteBorder,
-                    contentDescription = "Favorite",
-                    tint = Color.Gray
-                )
-
-            }
-            Spacer(modifier = Modifier.padding(vertical = 16.dp))
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                //boton - + y cantidad
-                Column {
-                    Row {
-                        IconButton(onClick = { /*TODO*/ }) {
-                            Icon(
-                                imageVector = Icons.Default.KeyboardArrowDown,
-                                contentDescription = "Decrease quantity",
-                                tint = colorResource(
-                                    id = R.color.border_item_card_color
+                Spacer(modifier = Modifier.padding(vertical = 16.dp))
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    //boton - + y cantidad
+                    Column {
+                        Row {
+                            IconButton(onClick = { /*TODO*/ }) {
+                                Icon(
+                                    imageVector = Icons.Default.KeyboardArrowDown,
+                                    contentDescription = "Decrease quantity",
+                                    tint = colorResource(
+                                        id = R.color.border_item_card_color
+                                    )
                                 )
-                            )
-                        }
-                        Box(
-                            modifier = Modifier
-                                .size(45.dp)
-                                .clip(RoundedCornerShape(16.dp))
-                                .background(Color.White)
-                                .border(2.dp, Color(0xFFE2E2E2), RoundedCornerShape(16.dp))
-                        ) {
-                            Text(
-                                text = "1",
-                                fontSize = 20.sp,
-                                modifier = Modifier.align(Alignment.Center)
-                            )
-                        }
-
-                        IconButton(onClick = { /*TODO*/ }) {
-                            Icon(
-                                imageVector = Icons.Default.KeyboardArrowUp,
-                                contentDescription = "Increase quantity",
-                                tint = colorResource(
-                                    id = R.color.principal_button_color
+                            }
+                            Box(
+                                modifier = Modifier
+                                    .size(45.dp)
+                                    .clip(RoundedCornerShape(16.dp))
+                                    .background(Color.White)
+                                    .border(2.dp, Color(0xFFE2E2E2), RoundedCornerShape(16.dp))
+                            ) {
+                                Text(
+                                    text = "1",
+                                    fontSize = 20.sp,
+                                    modifier = Modifier.align(Alignment.Center)
                                 )
-                            )
+                            }
+
+                            IconButton(onClick = { /*TODO*/ }) {
+                                Icon(
+                                    imageVector = Icons.Default.KeyboardArrowUp,
+                                    contentDescription = "Increase quantity",
+                                    tint = colorResource(
+                                        id = R.color.principal_button_color
+                                    )
+                                )
+                            }
                         }
                     }
+                    Text(
+                        text = "$${product.price}",
+                        style = MaterialTheme.typography.headlineSmall,
+                        fontWeight = FontWeight.Bold
+                    )
                 }
-                Text(
-                    text = "$${product.price}",
-                    style = MaterialTheme.typography.headlineSmall,
-                    fontWeight = FontWeight.Bold
+                Divider(
+                    color = Color.LightGray,
+                    thickness = 1.dp,
+                    modifier = Modifier.padding(vertical = 8.dp)
                 )
-            }
-            Divider(
-                color = Color.LightGray,
-                thickness = 1.dp,
-                modifier = Modifier.padding(vertical = 8.dp)
-            )
-            AccordionComponent(title = "Product Detail", body = product.description)
-            AccordionComponent(title = "Nutrition", body = "Nutrition information")
-            AccordionComponent(title = "Review", body = "", rating = product.rating)
+                AccordionComponent(title = "Product Detail", body = product.description)
+                AccordionComponent(title = "Nutrition", body = "Nutrition information")
+                AccordionComponent(title = "Review", body = "", rating = product.rating)
 
-            Row(verticalAlignment = Alignment.Bottom) {
-                BasicButton(text = "Add to Basket", onClick = { /*Redirect to Cart*/ })
+                Row(verticalAlignment = Alignment.Bottom) {
+                    BasicButton(text = "Add to Basket", onClick = { navigationActions.navigateToCart() })
+                }
             }
         }
     }
