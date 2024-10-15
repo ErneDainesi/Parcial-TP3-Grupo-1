@@ -6,6 +6,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.parcial_tp3_grupo_1.screens.category.Categories
+import com.example.parcial_tp3_grupo_1.screens.category.CategoryRoute
+import com.example.parcial_tp3_grupo_1.screens.explore.ExploreRoute
 import com.example.parcial_tp3_grupo_1.screens.Account.AccountRoute
 import com.example.parcial_tp3_grupo_1.screens.cart.CartRoute
 import com.example.parcial_tp3_grupo_1.screens.favorite.FavoriteRoute
@@ -31,32 +34,38 @@ fun MainRouteNavGraph(
         composable(route = AppDestinations.SHOP_ROUTE) {
             HomeRoute(navActions = navigationActions)
         }
-        
+
         composable(route = AppDestinations.EXPLORE_ROUTE) {
-            // Just for testing, here we need to add the Explore Route
-            SignUpRoute(navigationActions = navigationActions)
+            ExploreRoute(navigationActions = navigationActions)
         }
-        
+
         composable(route = AppDestinations.CART_ROUTE) {
             CartRoute(navigationActions = navigationActions)
         }
-        
+
         composable(route = AppDestinations.FAVORITE_ROUTE) {
             FavoriteRoute(navigationActions = navigationActions)
         }
-        
+
         composable(route = AppDestinations.SIGNIN_ROUTE) {
             SignInRoute(navigationActions = navigationActions)
         }
-        
+
         composable(route = AppDestinations.SIGNUP_ROUTE) {
             SignUpRoute(navigationActions = navigationActions)
         }
-        
+        composable(route = AppDestinations.CATEGORY_ROUTE) { backStackEntry ->
+            val category =
+                backStackEntry.arguments?.getString("category")
+            category?.let {
+                CategoryRoute(navigationActions = navigationActions, category)
+            }
+        }
+
         composable(route = AppDestinations.ACCOUNT_ROUTE) {
             AccountRoute(navigationActions = navigationActions)
         }
-        
+
         composable(
             route = AppDestinations.PROD_DETAIL_ROUTE
         ) { backStackEntry ->
@@ -67,12 +76,12 @@ fun MainRouteNavGraph(
                     navigationActions = navigationActions,
                 )
             }
-        } 
-        
+        }
+
         composable(route = AppDestinations.SPLASH_ROUTE) {
             SplashScreen()
         }
-        
+
         composable(route = AppDestinations.ONBOARDING_ROUTE) {
             OnboardingRoute(navigationActions = navigationActions)
         }
