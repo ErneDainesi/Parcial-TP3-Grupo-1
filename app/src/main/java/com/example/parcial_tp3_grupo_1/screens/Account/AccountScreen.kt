@@ -22,6 +22,7 @@ import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -78,6 +79,7 @@ fun AccountScreen(
                 Text(text = "lmshuvo97@gmail.com", fontSize = 14.sp, color = Color.Gray)
             }
         }
+        Divider()
         AccountButton("Orders", R.drawable.orders_icon)
         AccountButton("My Details", R.drawable.my_details_icon)
         AccountButton("Delivery Address", R.drawable.delivery_address)
@@ -100,7 +102,7 @@ private fun AccountButton(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(10.dp),
+            .padding(16.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
@@ -110,7 +112,9 @@ private fun AccountButton(
             Image(
                 painter = painterResource(id = image),
                 contentDescription = text,
-                modifier = modifier.size(24.dp).padding(end = 8.dp)
+                modifier = modifier
+                    .size(24.dp)
+                    .padding(end = 8.dp)
             )
 
             Text(text = text, fontSize = 16.sp, color = Color.Black)
@@ -123,6 +127,7 @@ private fun AccountButton(
             modifier = modifier.size(24.dp)
         )
     }
+    Divider()
 }
 
 @Composable
@@ -174,7 +179,9 @@ fun DarkModeButton(modifier: Modifier = Modifier) {
     var isDarkMode by remember { mutableStateOf(systemInDarkTheme) }
 
     Row(
-        modifier = modifier.fillMaxWidth().padding(16.dp),
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(16.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -184,6 +191,7 @@ fun DarkModeButton(modifier: Modifier = Modifier) {
             onCheckedChange = { isDarkMode = it },
         )
     }
+    Divider()
 
     MaterialTheme(
         colorScheme = if (isDarkMode) darkColorScheme() else lightColorScheme()
