@@ -1,5 +1,6 @@
 package com.example.parcial_tp3_grupo_1.screens.product
 
+import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -19,6 +20,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
@@ -31,82 +33,50 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
 import com.example.parcial_tp3_grupo_1.R
 import com.example.parcial_tp3_grupo_1.model.Product
 import com.example.parcial_tp3_grupo_1.model.Rating
 import com.example.parcial_tp3_grupo_1.navigation.MainNavActions
 import com.example.parcial_tp3_grupo_1.ui.components.BasicButton
 
-//@Composable
-//fun ProductDetailScreen(
-////    productId: Int,
-//    product: Product,
-//    navigationActions: MainNavActions,
-////    viewModel: ProductDetailViewModel = ProductDetailViewModel(FakeStoreService(FakeStoreHelper()))
-//) {
-
-//    val product by viewModel.product
-//    val isLoading by viewModel.isLoading
-//    val errorMsg by viewModel.errorMsg
-//
-//    LaunchedEffect(Unit) {
-//        viewModel.getProdById(productId)
-//    }
-//
-//    when {
-//        isLoading -> {
-//            CircularProgressIndicator()
-//        }
-//
-//        errorMsg != null -> {
-//            Text(text = errorMsg!!)
-//        }
-//
-//        product != null -> {
-//            ProductDetailView(product = product!!, navigationActions = navigationActions)
-//        }
-//
-//        else -> {
-//            Column{
-//                Text(text = productId.toString())
-//                Text(text = "No se encontró el producto")
-//            }
-//        }
-//
-//
-//    }
-//}
 
 @Composable
 fun ProductDetailScreen(
     product: Product, navigationActions: MainNavActions
 ) {
+
+    var isFavorite by remember {
+        mutableStateOf(false)
+    }
+
+    var quantityCounter by rememberSaveable {
+        mutableStateOf(1)
+    }
+
     LazyColumn(modifier = Modifier.fillMaxSize()) {
-//        No renderiza la imagen web
-//        AsyncImage(
-//            model = "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
-//            contentDescription = product.title,
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .height(200.dp),
-//        )
         item {
-            Image(
-                painter = painterResource(id = R.drawable.banana),
-                contentDescription = product.image,
+
+            AsyncImage(
+                model = product.image,
+                contentDescription = product.title,
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .height(200.dp),
+//                    .clip(RoundedCornerShape(8.dp))
+                    .height(200.dp)
+                    .fillMaxWidth(),
+                onError = { error -> Log.w("image error", "${error.result}") }
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -126,13 +96,14 @@ fun ProductDetailScreen(
                             modifier = Modifier.padding(vertical = 8.dp)
                         )
                         Text(text = product.category)
+                        Icon(
+                            imageVector = if (!isFavorite) Icons.Default.FavoriteBorder else Icons.Default.Favorite,
+                            contentDescription = "Favorite",
+                            tint = Color.Gray,
+                            modifier = Modifier.clickable { isFavorite = !isFavorite }.align(Alignment.End)
+                        )
                     }
 
-                    Icon(
-                        imageVector = Icons.Default.FavoriteBorder,
-                        contentDescription = "Favorite",
-                        tint = Color.Gray
-                    )
 
                 }
                 Spacer(modifier = Modifier.padding(vertical = 16.dp))
@@ -144,7 +115,13 @@ fun ProductDetailScreen(
                     //boton - + y cantidad
                     Column {
                         Row {
-                            IconButton(onClick = { /*TODO*/ }) {
+                            IconButton(
+                                onClick = {
+                                    if (quantityCounter > 1) {
+                                        quantityCounter--
+                                    }
+                                }
+                            ) {
                                 Icon(
                                     imageVector = Icons.Default.KeyboardArrowDown,
                                     contentDescription = "Decrease quantity",
@@ -161,13 +138,13 @@ fun ProductDetailScreen(
                                     .border(2.dp, Color(0xFFE2E2E2), RoundedCornerShape(16.dp))
                             ) {
                                 Text(
-                                    text = "1",
+                                    text = quantityCounter.toString(),
                                     fontSize = 20.sp,
                                     modifier = Modifier.align(Alignment.Center)
                                 )
                             }
 
-                            IconButton(onClick = { /*TODO*/ }) {
+                            IconButton(onClick = { quantityCounter++ }) {
                                 Icon(
                                     imageVector = Icons.Default.KeyboardArrowUp,
                                     contentDescription = "Increase quantity",
@@ -209,7 +186,7 @@ fun AccordionComponent(
     body: String,
     rating: Rating? = null
 ) {
-    var isExpanded by remember { mutableStateOf(false) } // Estado para saber si está expandido o no
+    var isExpanded by remember { mutableStateOf(false) }
 
     Column(
         modifier = Modifier
@@ -218,13 +195,13 @@ fun AccordionComponent(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .clickable { isExpanded = !isExpanded } // Cambia el estado al hacer clic
+                .clickable { isExpanded = !isExpanded }
                 .padding(vertical = 8.dp)
                 .height(40.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         )
-        {// Título del acordeón
+        {
             Text(
                 text = title,
                 style = MaterialTheme.typography.titleMedium,
@@ -240,14 +217,9 @@ fun AccordionComponent(
                 modifier = Modifier.size(25.dp)
             )
         }
-        // Línea divisoria
-        Divider(
-            color = Color.LightGray,
-            thickness = 1.dp,
-            modifier = Modifier.padding(vertical = 8.dp)
-        )
 
-        // Contenido que se muestra/oculta según el estado de expansión
+
+
         AnimatedVisibility(
             visible = isExpanded,
         ) {
@@ -255,6 +227,11 @@ fun AccordionComponent(
                 Text(text = body)
             }
         }
+        Divider(
+            color = Color.LightGray,
+            thickness = 1.dp,
+            modifier = Modifier.padding(vertical = 8.dp)
+        )
 
     }
 }
@@ -280,7 +257,7 @@ fun StarImage(drawable: Int, contentDescription: String) {
         painter = painterResource(id = drawable),
         contentDescription = contentDescription,
         modifier = Modifier
-            .width(100.dp)
-            .height(40.dp)
+            .width(80.dp)
+            .height(20.dp)
     )
 }

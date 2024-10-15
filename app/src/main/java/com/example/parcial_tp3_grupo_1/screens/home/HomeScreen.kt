@@ -88,7 +88,9 @@ fun HomeScreen(
                     .fillMaxWidth()
             ) {
                 items(exclusiveOffers) {
-                    ProductCard(product = it, navigationActions = navActions)
+                    ProductCard(product = it, navigationActions = navActions,
+                        //REVISAR @NICO
+                        onAddToCartClick = {})
                     Spacer(modifier = Modifier.width(15.dp))
                 }
             }
@@ -117,7 +119,9 @@ fun HomeScreen(
                     .fillMaxWidth()
             ) {
                 items(bestSelling) {
-                    ProductCard(product = it, navigationActions = navActions)
+                    ProductCard(product = it, navigationActions = navActions,
+                        //REVISAR @NICO
+                        onAddToCartClick = {})
                     Spacer(modifier = Modifier.width(15.dp))
                 }
             }

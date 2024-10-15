@@ -2,20 +2,14 @@ package com.example.parcial_tp3_grupo_1.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavController
-import androidx.navigation.compose.NavHost
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
-import com.example.parcial_tp3_grupo_1.helpers.FakeStoreHelper
-import com.example.parcial_tp3_grupo_1.screens.product.ProductDetailRoute
-import com.example.parcial_tp3_grupo_1.screens.product.ProductDetailScreen
-import com.example.parcial_tp3_grupo_1.screens.product.ProductDetailViewModel
 import com.example.parcial_tp3_grupo_1.screens.home.HomeRoute
+import com.example.parcial_tp3_grupo_1.screens.product.ProductDetailRoute
 import com.example.parcial_tp3_grupo_1.screens.signin.SignInRoute
 import com.example.parcial_tp3_grupo_1.screens.signup.SignUpRoute
-import com.example.parcial_tp3_grupo_1.shared.FakeStoreService
 
 @Composable
 fun MainRouteNavGraph(
@@ -30,14 +24,12 @@ fun MainRouteNavGraph(
         modifier = modifier
     ) {
 
-        val service = FakeStoreService(FakeStoreHelper())
 
         composable(route = AppDestinations.SHOP_ROUTE) {
-            // Just for testing, here we need to add the Shop Route
             HomeRoute(navActions = navigationActions)
         }
         composable(route = AppDestinations.EXPLORE_ROUTE) {
-            // Just for testing, here we need to add the Cart Route
+            // Just for testing, here we need to add the Explore Route
             SignUpRoute(navigationActions = navigationActions)
         }
         composable(route = AppDestinations.CART_ROUTE) {
@@ -49,7 +41,7 @@ fun MainRouteNavGraph(
             SignUpRoute(navigationActions = navigationActions)
         }
         composable(route = AppDestinations.ACCOUNT_ROUTE) {
-            // Just for testing, here we need to add the Cart Route
+            // Just for testing, here we need to add the Account Route
             SignUpRoute(navigationActions = navigationActions)
         }
         composable(route = AppDestinations.SIGNIN_ROUTE) {
@@ -58,9 +50,6 @@ fun MainRouteNavGraph(
         composable(route = AppDestinations.SIGNUP_ROUTE) {
             SignUpRoute(navigationActions = navigationActions)
         }
-//        composable(route = AppDestinations.PROD_DETAIL_ROUTE) {
-//            ProductDetailRoute(productId = 1, navigationActions = navigationActions)
-//        }
         composable(
             route = AppDestinations.PROD_DETAIL_ROUTE
         ) { backStackEntry ->
@@ -69,7 +58,6 @@ fun MainRouteNavGraph(
                 ProductDetailRoute(
                     productId = productId.toInt(),
                     navigationActions = navigationActions,
-                    viewModel = ProductDetailViewModel(service)
                 )
             }
         }
