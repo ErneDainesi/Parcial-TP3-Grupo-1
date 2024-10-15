@@ -29,10 +29,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.parcial_tp3_grupo_1.R
+import com.example.parcial_tp3_grupo_1.navigation.MainNavActions
 
-@Preview
 @Composable
-fun OnboardingScreen() {
+fun OnboardingScreen(
+    navActions: MainNavActions
+) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -62,6 +64,7 @@ fun OnboardingScreen() {
                 fontSize = 48.sp,
                 color = Color.White,
                 textAlign = TextAlign.Center,
+                lineHeight = 45.sp,
                 modifier = Modifier
                     .width(287.dp)
                     .padding(vertical = 16.dp)
@@ -78,7 +81,7 @@ fun OnboardingScreen() {
                     .padding(vertical = 8.dp)
             )
             Button(
-                onClick = { /* Acción del botón */ },
+                onClick = navActions.navigateToSignIn,
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color(0xFF53B175)
                 ),

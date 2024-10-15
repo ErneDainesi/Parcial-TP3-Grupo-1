@@ -22,26 +22,26 @@ import com.example.parcial_tp3_grupo_1.R
 @Preview
 @Composable
 fun SplashScreen() {
-    // Fondo verde
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFF53B175)) // Color verde de fondo
+            .background(Color(0xFF53B175))
     ) {
-        // Contenido centrado en la pantalla
         Column (
             modifier = Modifier
                 .fillMaxSize()
                 .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
-        ){Image(
-            painter = painterResource(id = R.drawable.logo_nectar), // Reemplazar con el recurso correcto
-            contentDescription = "Nectar Logo",
-            modifier = Modifier
-                .width(150.dp) // Ajusta el ancho según sea necesario
-                .padding(bottom = 16.dp)
-        )}
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.logo_nectar),
+                contentDescription = "Nectar Logo",
+                modifier = Modifier
+                    .width(150.dp)
+                    .padding(bottom = 16.dp)
+            )
+        }
     }
 }
 
