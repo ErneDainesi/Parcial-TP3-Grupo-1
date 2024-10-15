@@ -47,6 +47,11 @@ class MainActivity : ComponentActivity() {
                     }
                 }
 
+                LaunchedEffect(Unit) {
+                    delay(3000L)
+                    navigationActions.navigateToOnboarding()
+                }
+
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
                     floatingActionButton = { AddedToCartFAB(showFAB, navigationActions = navigationActions)},
@@ -65,7 +70,7 @@ class MainActivity : ComponentActivity() {
                     MainRouteNavGraph(
                         modifier = Modifier.padding(innerPadding),
                         navController = navController,
-                        startDestination = AppDestinations.SIGNIN_ROUTE,
+                        startDestination = AppDestinations.SPLASH_ROUTE,
                         navigationActions = navigationActions
                     )
                 }

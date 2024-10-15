@@ -35,6 +35,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.parcial_tp3_grupo_1.navigation.MainNavActions
+import com.example.parcial_tp3_grupo_1.ui.components.ErrorDialog
 import com.example.parcial_tp3_grupo_1.ui.components.BasicButton
 
 @Composable

@@ -9,8 +9,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.parcial_tp3_grupo_1.screens.Account.AccountRoute
 import com.example.parcial_tp3_grupo_1.screens.home.HomeRoute
+import com.example.parcial_tp3_grupo_1.screens.onboarding.OnboardingRoute
 import com.example.parcial_tp3_grupo_1.screens.signin.SignInRoute
 import com.example.parcial_tp3_grupo_1.screens.signup.SignUpRoute
+import com.example.parcial_tp3_grupo_1.screens.splash.SplashScreen
 
 @Composable
 fun MainRouteNavGraph(
@@ -48,6 +50,12 @@ fun MainRouteNavGraph(
         }
         composable(route = AppDestinations.ACCOUNT_ROUTE) {
             AccountRoute(navigationActions = navigationActions)
+        }
+        composable(route = AppDestinations.SPLASH_ROUTE) {
+            SplashScreen()
+        }
+        composable(route = AppDestinations.ONBOARDING_ROUTE) {
+            OnboardingRoute(navigationActions = navigationActions)
         }
     }
 }
