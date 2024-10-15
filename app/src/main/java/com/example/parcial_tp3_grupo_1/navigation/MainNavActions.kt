@@ -12,9 +12,17 @@ object AppDestinations {
     const val CATEGORY_ROUTE = "category/{category}"
     const val SIGNIN_ROUTE = "signin"
     const val SIGNUP_ROUTE = "signup"
+    const val PROD_DETAIL_ROUTE = "product/{id}"
+    const val SPLASH_ROUTE = "splash"
+    const val ONBOARDING_ROUTE = "onboarding"
 }
 
-val hideBottomBar = listOf(AppDestinations.SIGNUP_ROUTE, AppDestinations.SIGNIN_ROUTE)
+val hideBottomBar = listOf(
+    AppDestinations.SIGNUP_ROUTE,
+    AppDestinations.SIGNIN_ROUTE,
+    AppDestinations.SPLASH_ROUTE,
+    AppDestinations.ONBOARDING_ROUTE
+)
 
 class MainNavActions(
     navController: NavHostController,
@@ -43,6 +51,17 @@ class MainNavActions(
     }
     val navigateToSignUp: () -> Unit = {
         navController.navigate(AppDestinations.SIGNUP_ROUTE)
+    }
+    val navigateToOnboarding: () -> Unit = {
+        navController.navigate(AppDestinations.ONBOARDING_ROUTE)
+    }
+
+    val navigateToProductDetail: (id: Int) -> Unit = { id ->
+        navController.navigate(
+            AppDestinations.PROD_DETAIL_ROUTE.replace(
+                oldValue = "{id}", newValue = id.toString()
+            )
+        )
     }
 
     fun shouldHideBottombar(location: String?): Boolean {

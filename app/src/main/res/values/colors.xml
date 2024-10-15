@@ -7,6 +7,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="green">#53B175</color>
     <color name="check_button_color">#83437254</color>
     <color name="principal_button_color">#53B175</color>
     <color name="border_item_card_color">#7C7C7C</color>

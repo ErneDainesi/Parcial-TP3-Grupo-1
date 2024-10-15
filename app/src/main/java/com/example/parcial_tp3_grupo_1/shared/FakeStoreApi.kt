@@ -27,9 +27,9 @@ interface FakeStoreApi {
         @Path("category") category: String
     ): Response<List<Product>>
 
-    @GET("cart/user/{id}")
+    @GET("carts/{id}")
     suspend fun getCartByUser(
         @Path("id") id: Int
-    ): Response<List<Cart>>
+    ): Response<Cart>
 
 }
