@@ -173,7 +173,7 @@ fun ProductDetailScreen(
                 Row(verticalAlignment = Alignment.Bottom) {
                     BasicButton(
                         text = "Add to Basket",
-                        onClick = { navigationActions.navigateToCart() })
+                        onClick = { /*TODO*/ },)
                 }
             }
         }
