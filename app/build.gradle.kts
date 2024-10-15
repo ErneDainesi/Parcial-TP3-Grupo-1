@@ -62,6 +62,7 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
     testImplementation(libs.junit)
+    implementation(libs.coil.kt.coil.compose)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
