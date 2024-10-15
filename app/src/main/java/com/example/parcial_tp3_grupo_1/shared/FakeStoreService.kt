@@ -30,7 +30,7 @@ class FakeStoreService (
         fakestore.getProductsByCategory(category)
     }
 
-    suspend fun getCartByUser(id: Int): List<Cart>? = withContext(Dispatchers.IO) {
+    suspend fun getCartByUser(id: Int): Cart? = withContext(Dispatchers.IO) {
         fakestore.getCartByUser(id)
     }
 }

@@ -51,6 +51,7 @@ import com.example.parcial_tp3_grupo_1.model.Product
 import com.example.parcial_tp3_grupo_1.model.Rating
 import com.example.parcial_tp3_grupo_1.navigation.MainNavActions
 import com.example.parcial_tp3_grupo_1.ui.components.BasicButton
+import com.example.parcial_tp3_grupo_1.ui.components.QuantityButtons
 
 
 @Composable
@@ -100,7 +101,9 @@ fun ProductDetailScreen(
                             imageVector = if (!isFavorite) Icons.Default.FavoriteBorder else Icons.Default.Favorite,
                             contentDescription = "Favorite",
                             tint = Color.Gray,
-                            modifier = Modifier.clickable { isFavorite = !isFavorite }.align(Alignment.End)
+                            modifier = Modifier
+                                .clickable { isFavorite = !isFavorite }
+                                .align(Alignment.End)
                         )
                     }
 
@@ -112,49 +115,7 @@ fun ProductDetailScreen(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    //boton - + y cantidad
-                    Column {
-                        Row {
-                            IconButton(
-                                onClick = {
-                                    if (quantityCounter > 1) {
-                                        quantityCounter--
-                                    }
-                                }
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Default.KeyboardArrowDown,
-                                    contentDescription = "Decrease quantity",
-                                    tint = colorResource(
-                                        id = R.color.border_item_card_color
-                                    )
-                                )
-                            }
-                            Box(
-                                modifier = Modifier
-                                    .size(45.dp)
-                                    .clip(RoundedCornerShape(16.dp))
-                                    .background(Color.White)
-                                    .border(2.dp, Color(0xFFE2E2E2), RoundedCornerShape(16.dp))
-                            ) {
-                                Text(
-                                    text = quantityCounter.toString(),
-                                    fontSize = 20.sp,
-                                    modifier = Modifier.align(Alignment.Center)
-                                )
-                            }
-
-                            IconButton(onClick = { quantityCounter++ }) {
-                                Icon(
-                                    imageVector = Icons.Default.KeyboardArrowUp,
-                                    contentDescription = "Increase quantity",
-                                    tint = colorResource(
-                                        id = R.color.principal_button_color
-                                    )
-                                )
-                            }
-                        }
-                    }
+                    QuantityButtons()
                     Text(
                         text = "$${product.price}",
                         style = MaterialTheme.typography.headlineSmall,

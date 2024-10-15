@@ -104,10 +104,10 @@ class FakeStoreHelper {
         }
     }
 
-    suspend fun getCartByUser(id: Int): List<Cart>? {
+    suspend fun getCartByUser(id: Int): Cart? {
         val response = api.getCartByUser(id)
         return if (response.isSuccessful) {
-            val result = response.body()?.map {
+            val result = response.body()?.let {
                 Cart(
                     id = it.id,
                     userId = it.userId,
@@ -117,7 +117,7 @@ class FakeStoreHelper {
             }
             result
         } else {
-            emptyList()
+            null
         }
     }
 }
