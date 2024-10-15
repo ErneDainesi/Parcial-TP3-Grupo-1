@@ -64,7 +64,7 @@ import kotlinx.coroutines.delay
 @Composable
 fun ProductCard(
     product: Product,
-    onAddToCartClick: () -> Unit = { },
+    onAddToCartClick: () -> Unit,
     navigationActions: MainNavActions
 ) {
 
@@ -81,8 +81,8 @@ fun ProductCard(
                 shape = RoundedCornerShape(16.dp)
             ),
 
-        onClick = { /* redireccionar a detalle product */
-            navigationActions.navigateToProductDetail(product.id)
+        onClick = { /* agregar redireccion valida */
+            navigationActions.navigateToProductDetail()
         }
     ) {
 

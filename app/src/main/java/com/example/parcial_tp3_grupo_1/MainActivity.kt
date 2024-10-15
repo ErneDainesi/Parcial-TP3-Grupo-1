@@ -77,7 +77,8 @@ class MainActivity : ComponentActivity() {
                     MainRouteNavGraph(
                         modifier = Modifier.padding(innerPadding),
                         navController = navController,
-                        startDestination = AppDestinations.SIGNIN_ROUTE,
+                        //cambiar por SIGNIN
+                        startDestination = AppDestinations.EXPLORE_ROUTE,
                         navigationActions = navigationActions
                     )
                 }

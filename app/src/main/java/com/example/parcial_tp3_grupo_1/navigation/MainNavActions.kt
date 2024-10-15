@@ -23,7 +23,8 @@ class MainNavActions(
         navController.navigate(AppDestinations.ACCOUNT_ROUTE)
     }
     val navigateToCart: () -> Unit = {
-        navController.navigate(AppDestinations.CART_ROUTE)
+//        navController.navigate(AppDestinations.CART_ROUTE)
+        navController.navigate(AppDestinations.PROD_DETAIL_ROUTE)
     }
     val navigateToExplore: () -> Unit = {
         navController.navigate(AppDestinations.EXPLORE_ROUTE)
@@ -40,9 +41,14 @@ class MainNavActions(
     val navigateToSignUp: () -> Unit = {
         navController.navigate(AppDestinations.SIGNUP_ROUTE)
     }
-    val navigateToProductDetail: (id: Int) -> Unit = { id ->
-        navController.navigate(AppDestinations.PROD_DETAIL_ROUTE + id)
+
+    //    val navigateToProductDetail: (id: Int) -> Unit = { id ->
+//        navController.navigate(AppDestinations.PROD_DETAIL_ROUTE + "$id")
+//    }
+    val navigateToProductDetail: () -> Unit = {
+        navController.navigate(AppDestinations.PROD_DETAIL_ROUTE)
     }
+
 
     fun shouldHideBottombar(location: String?): Boolean {
         return hideBottomBar.contains(location)
