@@ -8,8 +8,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -22,7 +20,6 @@ import com.example.parcial_tp3_grupo_1.navigation.AppDestinations
 import com.example.parcial_tp3_grupo_1.navigation.DynamicTopBar
 import com.example.parcial_tp3_grupo_1.navigation.MainNavActions
 import com.example.parcial_tp3_grupo_1.navigation.MainRouteNavGraph
-import com.example.parcial_tp3_grupo_1.screens.Account.AccountScreen
 import com.example.parcial_tp3_grupo_1.ui.components.AddedToCartFAB
 import com.example.parcial_tp3_grupo_1.ui.components.BottomNavBar
 import com.example.parcial_tp3_grupo_1.ui.theme.ParcialTP3Grupo1Theme
@@ -65,8 +62,6 @@ class MainActivity : ComponentActivity() {
                     }
                 )
                 { innerPadding ->
-
-
                     MainRouteNavGraph(
                         modifier = Modifier.padding(innerPadding),
                         navController = navController,
