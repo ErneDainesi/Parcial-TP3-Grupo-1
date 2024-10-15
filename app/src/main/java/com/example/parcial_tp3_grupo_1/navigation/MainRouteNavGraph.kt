@@ -37,8 +37,6 @@ fun MainRouteNavGraph(
 
         composable(route = AppDestinations.EXPLORE_ROUTE) {
             ExploreRoute(navigationActions = navigationActions)
-            // Just for testing, here we need to add the Explore Route
-            SignUpRoute(navigationActions = navigationActions)
         }
 
         composable(route = AppDestinations.CART_ROUTE) {

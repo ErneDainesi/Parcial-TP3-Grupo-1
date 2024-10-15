@@ -43,7 +43,7 @@ val exploreItems = listOf(
         R.drawable.explore_beverages,
         Color(183, 223, 245, 26),
         Categories.BEVERAGES
-    ),     ExploreItem(
+    ), ExploreItem(
         "Fresh Fruits & Vegetables",
         R.drawable.explore_fresh_fruits_and_vegetables,
         Color(83, 177, 117, 26),
@@ -91,13 +91,85 @@ val exploreItems = listOf(
 //val rating: Rating
 
 val productos = listOf(
-    Product(1, "Diet Coke", 1.99, "355ml, Price", Categories.BEVERAGES, R.drawable.dietcoke, Rating(4.5, 100)),
-    Product(1, "Egg Chicken White", 1.49, "355ml, Price", Categories.DAIRY_AND_EGGS, R.drawable.eggchickenwhite, Rating(3.5, 100)),
-    Product(1, "Egg eggnoodle", 1.49, "355ml, Price", Categories.DAIRY_AND_EGGS, R.drawable.eggnoodle, Rating(3.5, 100)),
-    Product(1, "Egg eggchickenred", 1.49, "355ml, Price", Categories.DAIRY_AND_EGGS, R.drawable.eggchickenred, Rating(3.5, 100)),
-    Product(1, "Egg eggpasta", 1.49, "355ml, Price", Categories.DAIRY_AND_EGGS, R.drawable.eggpasta, Rating(3.5, 100)),
-    Product(1, "Sprite", 1.49, "355ml, Price", Categories.BEVERAGES, R.drawable.sprite, Rating(3.5, 100)),
-    Product(1, "Pepsi", 1.49, "355ml, Price", Categories.BEVERAGES, R.drawable.pepsican, Rating(3.5, 100)),
-    Product(1, "Sprite", 1.49, "355ml, sprite 2", Categories.BEVERAGES, R.drawable.sprite, Rating(3.5, 100)),
-    Product(1, "Egg Chicken White", 1.49, "355ml, 2", Categories.DAIRY_AND_EGGS, R.drawable.eggchickenwhite, Rating(3.5, 100)),
-    )
+    Product(
+        1,
+        "Diet Coke",
+        1.99,
+        "355ml, Price",
+        Categories.BEVERAGES,
+        "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+        Rating(4.5, 100)
+    ),
+    Product(
+        1,
+        "Egg Chicken White",
+        1.49,
+        "355ml, Price",
+        Categories.DAIRY_AND_EGGS,
+        "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg",
+        Rating(3.5, 100)
+    ),
+    Product(
+        1,
+        "Egg eggnoodle",
+        1.49,
+        "355ml, Price",
+        Categories.DAIRY_AND_EGGS,
+        "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg",
+        Rating(3.5, 100)
+    ),
+    Product(
+        1,
+        "Egg eggchickenred",
+        1.49,
+        "355ml, Price",
+        Categories.DAIRY_AND_EGGS,
+        "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+        Rating(3.5, 100)
+    ),
+    Product(
+        1,
+        "Egg eggpasta",
+        1.49,
+        "355ml, Price",
+        Categories.DAIRY_AND_EGGS,
+        "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg",
+        Rating(3.5, 100)
+    ),
+    Product(
+        1,
+        "Sprite",
+        1.49,
+        "355ml, Price",
+        Categories.BEVERAGES,
+        "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+        Rating(3.5, 100)
+    ),
+    Product(
+        1,
+        "Pepsi",
+        1.49,
+        "355ml, Price",
+        Categories.BEVERAGES,
+        "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg",
+        Rating(3.5, 100)
+    ),
+    Product(
+        1,
+        "Sprite",
+        1.49,
+        "355ml, sprite 2",
+        Categories.BEVERAGES,
+        "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg",
+        Rating(3.5, 100)
+    ),
+    Product(
+        1,
+        "Egg Chicken White",
+        1.49,
+        "355ml, 2",
+        Categories.DAIRY_AND_EGGS,
+        "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg",
+        Rating(3.5, 100)
+    ),
+)
