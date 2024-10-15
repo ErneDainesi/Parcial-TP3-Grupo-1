@@ -40,7 +40,7 @@ class MainActivity : ComponentActivity() {
                     },
                     topBar = {
                         val currentLocation = navController.currentBackStackEntryAsState().value?.destination?.route
-                        DynamicTopBar(currentLocation)
+                        DynamicTopBar(currentLocation, navigationActions.navigateToShop) // Se puede usar para ir a cualquier lado que se quiera ir
                     }
                 ) { innerPadding ->
                     MainRouteNavGraph(

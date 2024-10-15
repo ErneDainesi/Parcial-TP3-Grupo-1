@@ -4,18 +4,25 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
+import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Switch
@@ -79,6 +86,7 @@ fun AccountScreen(
         AccountButton("Help", R.drawable.help_icon)
 
         DarkModeButton()
+        Spacer(modifier = Modifier.height(70.dp))
         LogOutButton(navigationActions)
     }
 }
@@ -93,14 +101,27 @@ private fun AccountButton(
         modifier = modifier
             .fillMaxWidth()
             .padding(10.dp),
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        Image(
-            painter = painterResource(id = image),
-            contentDescription = text,
-            modifier = modifier.size(24.dp).padding(end = 8.dp)
+        Row(
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Image(
+                painter = painterResource(id = image),
+                contentDescription = text,
+                modifier = modifier.size(24.dp).padding(end = 8.dp)
+            )
+
+            Text(text = text, fontSize = 16.sp, color = Color.Black)
+        }
+
+        Icon(
+            imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
+            contentDescription = "Arrow right",
+            tint = Color.Gray,
+            modifier = modifier.size(24.dp)
         )
-        Text(text = text, fontSize = 16.sp, color = Color.Black)
     }
 }
 
@@ -125,19 +146,25 @@ private fun LogOutButton(
         ),
         shape = ButtonDefaults.outlinedShape
     ) {
-        Image(
-            painter = painterResource(id = R.drawable.log_out),
-            contentDescription = "Log out",
-            contentScale = ContentScale.Crop,
-            modifier = modifier.size(19.dp)
-        )
-        Text(
-            text = "Log Out",
-            fontSize = 16.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color(greenColor),
-            modifier = modifier.padding(start = 8.dp)
-        )
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.log_out),
+                contentDescription = "Log out",
+                contentScale = ContentScale.Crop,
+                modifier = modifier.size(19.dp)
+            )
+            Spacer(modifier = Modifier.width(100.dp))
+            Text(
+                text = "Log Out",
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color(greenColor),
+                modifier = modifier.padding(start = 8.dp)
+            )
+        }
     }
 }
 
@@ -161,6 +188,6 @@ fun DarkModeButton(modifier: Modifier = Modifier) {
     MaterialTheme(
         colorScheme = if (isDarkMode) darkColorScheme() else lightColorScheme()
     ) {
-        Text("Current theme: ${if (isDarkMode) "Dark" else "Light"}")
+
     }
 }

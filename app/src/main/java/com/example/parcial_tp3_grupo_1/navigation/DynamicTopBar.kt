@@ -12,15 +12,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 
-object TopBar  {
-    const val HOME_SCREEN = "Shop"
-    const val EXPLORE_SCREEN = "Find Products"
-    const val CART_SCREEN = "My Cart"
-    const val FAVORITE_SCREEN = "Favorites"
-    const val ACCOUNT_SCREEN = "Account"
-    const val PRODUCT_DETAIL_SCREEN = "Product Detail"
-    const val CATEGORIES_SCREEN = "Categories"
-    const val SEARCH_SCREEN = "Search"
+object TopBar {
+    const val HOME_SCREEN = "shop"
+    const val EXPLORE_SCREEN = "explore"
+    const val CART_SCREEN = "cart"
+    const val FAVORITE_SCREEN = "favorite"
+    const val ACCOUNT_SCREEN = "account"
+    const val PRODUCT_DETAIL_SCREEN = "product detail"
+    const val CATEGORIES_SCREEN = "categories"
+    const val SEARCH_SCREEN = "search"
 }
 
 val showTopBar = listOf(
@@ -31,25 +31,37 @@ val showTopBar = listOf(
     TopBar.ACCOUNT_SCREEN,
     TopBar.PRODUCT_DETAIL_SCREEN,
     TopBar.CATEGORIES_SCREEN,
-    TopBar.SEARCH_SCREEN
+    TopBar.SEARCH_SCREEN,
 )
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DynamicTopBar(
     location: String?,
+    onNavigationClick: (() -> Unit)? = null
 ) {
-    if (topBarShouldHide(location) && location != null) {
+    if (location != null && topBarShouldShow(location)) {
+        val title = when (location) {
+            TopBar.HOME_SCREEN -> "Shop"
+            TopBar.EXPLORE_SCREEN -> "Find Products"
+            TopBar.CART_SCREEN -> "My Cart"
+            TopBar.FAVORITE_SCREEN -> "Favorites"
+            TopBar.ACCOUNT_SCREEN -> "Account"
+            TopBar.PRODUCT_DETAIL_SCREEN -> "Product Detail"
+            TopBar.CATEGORIES_SCREEN -> "Categories"
+            TopBar.SEARCH_SCREEN -> "Search"
+            else -> "Shop"
+        }
         TopAppBar(
             colors = TopAppBarDefaults.topAppBarColors(
                 containerColor = Color.White,
                 titleContentColor = Color.Black,
             ),
             title = {
-                Text(text = location)
+                Text(text = title)
             },
             navigationIcon = {
-                IconButton(onClick = { /*TODO*/ }) {
+                IconButton(onClick = { onNavigationClick?.invoke() }) {
                     Icon(Icons.Filled.Menu, contentDescription = "Menu", tint = Color.Black)
                 }
             },
@@ -58,12 +70,6 @@ fun DynamicTopBar(
 }
 
 @Composable
-fun topBarShouldHide(location: String?): Boolean {
-    return !showTopBar.contains(location)
-}
-
-@Composable
-@Preview (showBackground = true)
-fun PreviewTopBar() {
-    DynamicTopBar(location = "Account")
+fun topBarShouldShow(location: String?): Boolean {
+    return showTopBar.contains(location)
 }
