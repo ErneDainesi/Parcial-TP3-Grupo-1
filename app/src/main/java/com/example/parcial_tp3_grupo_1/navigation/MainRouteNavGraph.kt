@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.parcial_tp3_grupo_1.screens.category.Categories
 import com.example.parcial_tp3_grupo_1.screens.category.CategoryRoute
 import com.example.parcial_tp3_grupo_1.screens.explore.ExploreRoute
 import com.example.parcial_tp3_grupo_1.screens.signin.SignInRoute
@@ -50,9 +51,12 @@ fun MainRouteNavGraph(
         composable(route = AppDestinations.SIGNUP_ROUTE) {
             SignUpRoute(navigationActions = navigationActions)
         }
-        composable(route = AppDestinations.CATEGORY_ROUTE) {
-            // Just for testing, here we need to add the Cart Route
-            CategoryRoute(navigationActions = navigationActions)
+        composable(route = AppDestinations.CATEGORY_ROUTE) { backStackEntry ->
+            val category =
+                backStackEntry.arguments?.getString("category")
+            category?.let {
+                CategoryRoute(navigationActions = navigationActions, category)
+            }
         }
     }
 }

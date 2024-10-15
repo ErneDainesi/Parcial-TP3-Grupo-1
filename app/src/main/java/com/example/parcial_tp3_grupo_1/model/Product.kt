@@ -7,6 +7,6 @@ data class Product(
     val description: String,
     val category: String,
     //validar image
-    val image: String,
+    val image: Int,
     val rating: Rating
 )

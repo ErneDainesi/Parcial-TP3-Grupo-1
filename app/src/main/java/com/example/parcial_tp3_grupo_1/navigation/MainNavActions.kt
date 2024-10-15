@@ -1,6 +1,7 @@
 package com.example.parcial_tp3_grupo_1.navigation
 
 import androidx.navigation.NavHostController
+import com.example.parcial_tp3_grupo_1.screens.category.Categories
 
 object AppDestinations {
     const val ACCOUNT_ROUTE = "account"
@@ -8,7 +9,7 @@ object AppDestinations {
     const val EXPLORE_ROUTE = "explore"
     const val FAVORITE_ROUTE = "favorite"
     const val SHOP_ROUTE = "shop"
-    const val CATEGORY_ROUTE = "category"
+    const val CATEGORY_ROUTE = "category/{category}"
     const val SIGNIN_ROUTE = "signin"
     const val SIGNUP_ROUTE = "signup"
 }
@@ -34,8 +35,8 @@ class MainNavActions(
     val navigateToShop: () -> Unit = {
         navController.navigate(AppDestinations.SHOP_ROUTE)
     }
-    val navigateToCategory: () -> Unit = {
-        navController.navigate(AppDestinations.CATEGORY_ROUTE)
+    val navigateToCategory: (category: String) -> Unit = { category ->
+        navController.navigate(AppDestinations.CATEGORY_ROUTE.replace("{category}", category))
     }
     val navigateToSignIn: () -> Unit = {
         navController.navigate(AppDestinations.SIGNIN_ROUTE)

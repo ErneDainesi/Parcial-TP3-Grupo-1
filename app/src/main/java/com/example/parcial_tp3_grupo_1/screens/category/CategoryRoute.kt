@@ -6,7 +6,7 @@ import com.example.parcial_tp3_grupo_1.screens.explore.ExploreScreen
 
 @Composable
 fun CategoryRoute(
-    navigationActions: MainNavActions
+    navigationActions: MainNavActions, category: String
 ) {
-    CategoryScreen(navigationActions)
+    CategoryScreen(navigationActions,  category)
 }

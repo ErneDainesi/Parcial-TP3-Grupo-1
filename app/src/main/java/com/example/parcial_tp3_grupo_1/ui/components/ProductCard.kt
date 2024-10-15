@@ -95,7 +95,7 @@ fun ProductCard(
         ) {
             Image(
 //                cambiar por imagen de producto
-                painter = painterResource(id = R.drawable.banana),
+                painter = painterResource(id = product.image),
                 contentDescription = product.title,
                 modifier = Modifier
                     .size(100.dp)

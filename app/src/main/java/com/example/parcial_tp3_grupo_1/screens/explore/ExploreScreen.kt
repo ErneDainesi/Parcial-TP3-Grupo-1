@@ -42,7 +42,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.parcial_tp3_grupo_1.R
 import com.example.parcial_tp3_grupo_1.data.exploreItems
+import com.example.parcial_tp3_grupo_1.model.ExploreItem
 import com.example.parcial_tp3_grupo_1.navigation.MainNavActions
+import com.example.parcial_tp3_grupo_1.screens.category.Categories
 
 
 //@Preview
@@ -110,7 +112,43 @@ fun ExploreScreen(navigationActions: MainNavActions) {
 //@Preview
 @Composable
 fun ExploreGrid(
-    exploreItems: List<ExploreItem>,
+    exploreItems: List<ExploreItem> = listOf(
+        ExploreItem(
+            "Fresh Fruits & Vegetables",
+            R.drawable.explore_fresh_fruits_and_vegetables,
+            Color(83, 177, 117, 26),
+            Categories.FRUITS_AND_VEGETABLES
+        ),
+        ExploreItem(
+            "Cooking Oil & Ghee",
+            R.drawable.explore_cooking_oil_and_ghee,
+            Color(248, 164, 76, 26),
+            Categories.OIL_AND_GHEE
+        ),
+        ExploreItem(
+            "Meat & Fish",
+            R.drawable.explore_meat_and_fish,
+            Color(247, 165, 147, 26),
+            Categories.MEAT_AND_FISH
+        ),
+        ExploreItem(
+            "Bakery & Snacks",
+            R.drawable.explore_bakery_and_snacks,
+            Color(211, 176, 224, 26),
+            Categories.BAKERY_AND_SNACKS
+        ),
+        ExploreItem(
+            "Dairy & Eggs",
+            R.drawable.explore_dairy_and_eggs,
+            Color(253, 229, 152, 26),
+            Categories.DAIRY_AND_EGGS
+        ),
+        ExploreItem(
+            "Beverages",
+            R.drawable.explore_beverages,
+            Color(183, 223, 245, 26),
+            Categories.BEVERAGES
+        )) ,
     navigationActions: MainNavActions
 ) {
 
@@ -124,7 +162,7 @@ fun ExploreGrid(
                 horizontalArrangement = Arrangement.SpaceEvenly,
 
                 modifier = Modifier
-                    .padding(top = 8.dp, bottom = 8.dp)
+                    .padding(top = 16.dp, bottom = 16.dp)
                     .fillMaxWidth()
             ) {
                 rowItems.forEach { item ->
@@ -155,7 +193,7 @@ fun ExploreCard(
             .padding(8.dp)
             .size(130.dp, 160.dp)
             .clickable {
-                navigationActions.navigateToCategory()
+                navigationActions.navigateToCategory(item.category)
             }
     ) {
         Image(
