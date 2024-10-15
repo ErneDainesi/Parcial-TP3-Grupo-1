@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.parcial_tp3_grupo_1.screens.Account.AccountRoute
 import com.example.parcial_tp3_grupo_1.screens.home.HomeRoute
 import com.example.parcial_tp3_grupo_1.screens.signin.SignInRoute
 import com.example.parcial_tp3_grupo_1.screens.signup.SignUpRoute
@@ -39,15 +40,14 @@ fun MainRouteNavGraph(
             // Just for testing, here we need to add the Cart Route
             SignUpRoute(navigationActions = navigationActions)
         }
-        composable(route = AppDestinations.ACCOUNT_ROUTE) {
-            // Just for testing, here we need to add the Cart Route
-            SignUpRoute(navigationActions = navigationActions)
-        }
         composable(route = AppDestinations.SIGNIN_ROUTE) {
             SignInRoute(navigationActions = navigationActions)
         }
         composable(route = AppDestinations.SIGNUP_ROUTE) {
             SignUpRoute(navigationActions = navigationActions)
+        }
+        composable(route = AppDestinations.ACCOUNT_ROUTE) {
+            AccountRoute(navigationActions = navigationActions)
         }
     }
 }

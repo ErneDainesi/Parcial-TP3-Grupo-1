@@ -8,18 +8,16 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.parcial_tp3_grupo_1.navigation.AppDestinations
+import com.example.parcial_tp3_grupo_1.navigation.DynamicTopBar
 import com.example.parcial_tp3_grupo_1.navigation.MainNavActions
 import com.example.parcial_tp3_grupo_1.navigation.MainRouteNavGraph
 import com.example.parcial_tp3_grupo_1.ui.components.AddedToCartFAB
@@ -57,11 +55,13 @@ class MainActivity : ComponentActivity() {
                         if (!navigationActions.shouldHideBottombar(currentLocation)) {
                             BottomNavBar(navigationActions = navigationActions)
                         }
+                    },
+                    topBar = {
+                        val currentLocation = navController.currentBackStackEntryAsState().value?.destination?.route
+                        DynamicTopBar(currentLocation, navigationActions.navigateToShop) // Se puede usar para ir a cualquier lado que se quiera ir
                     }
                 )
                 { innerPadding ->
-
-
                     MainRouteNavGraph(
                         modifier = Modifier.padding(innerPadding),
                         navController = navController,
@@ -71,21 +71,5 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    ParcialTP3Grupo1Theme {
-        Greeting("Android")
     }
 }
