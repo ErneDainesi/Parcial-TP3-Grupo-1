@@ -26,6 +26,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.parcial_tp3_grupo_1.MainActivityViewModel
 import com.example.parcial_tp3_grupo_1.R
 import com.example.parcial_tp3_grupo_1.model.Product
 import com.example.parcial_tp3_grupo_1.navigation.MainNavActions
@@ -37,12 +38,12 @@ fun HomeScreen(
     bestSelling: List<Product>,
     exclusiveOffers: List<Product>
 ) {
-    Column (
+    Column(
         modifier = Modifier
             .padding(top = 50.dp, start = 15.dp, end = 15.dp)
             .verticalScroll(rememberScrollState())
     ) {
-        Column (
+        Column(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
@@ -66,7 +67,7 @@ fun HomeScreen(
             }
         }
         Column {
-            Row (
+            Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier.fillMaxWidth()
@@ -83,21 +84,24 @@ fun HomeScreen(
                     Text(text = "See all", color = Color(0xFF53B175))
                 }
             }
-            LazyRow (
+            LazyRow(
                 modifier = Modifier
                     .fillMaxWidth()
             ) {
                 items(exclusiveOffers) {
-                    ProductCard(product = it, navigationActions = navActions,
+                    ProductCard(
+                        product = it,
+                        navigationActions = navActions,
+                        mainActivityViewModel = MainActivityViewModel()
                         //REVISAR @NICO
-                        onAddToCartClick = {})
+                    )
                     Spacer(modifier = Modifier.width(15.dp))
                 }
             }
         }
         Spacer(modifier = Modifier.height(20.dp))
         Column {
-            Row (
+            Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier.fillMaxWidth()
@@ -114,14 +118,16 @@ fun HomeScreen(
                     Text(text = "See all", color = Color(0xFF53B175))
                 }
             }
-            LazyRow (
+            LazyRow(
                 modifier = Modifier
                     .fillMaxWidth()
             ) {
                 items(bestSelling) {
-                    ProductCard(product = it, navigationActions = navActions,
-                        //REVISAR @NICO
-                        onAddToCartClick = {})
+                    ProductCard(
+                        product = it,
+                        navigationActions = navActions,
+                        mainActivityViewModel = MainActivityViewModel()
+                    )
                     Spacer(modifier = Modifier.width(15.dp))
                 }
             }

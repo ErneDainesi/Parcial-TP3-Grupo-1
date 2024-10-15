@@ -23,6 +23,11 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -34,16 +39,22 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
+import com.example.parcial_tp3_grupo_1.MainActivityViewModel
 import com.example.parcial_tp3_grupo_1.R
 import com.example.parcial_tp3_grupo_1.model.Product
 import com.example.parcial_tp3_grupo_1.navigation.MainNavActions
+import kotlinx.coroutines.delay
 
 
 @Composable
 fun ProductCard(
-    product: Product, onAddToCartClick: () -> Unit, navigationActions: MainNavActions
+    product: Product,
+    navigationActions: MainNavActions,
+    mainActivityViewModel: MainActivityViewModel
 ) {
+
     Card(
         shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(4.dp),
@@ -76,7 +87,7 @@ fun ProductCard(
                     .fillMaxWidth(),
                 alignment = Alignment.CenterStart,
                 contentScale = ContentScale.Crop,
-                onError = {error -> Log.w("image error", "${error.result}")}
+                onError = { error -> Log.w("image error", "${error.result}") }
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
@@ -107,7 +118,7 @@ fun ProductCard(
                 )
                 Spacer(modifier = Modifier.size(50.dp))
                 IconButton(
-                    onClick = { onAddToCartClick() },
+                    onClick = { mainActivityViewModel.showFloatingActionButton() },
                     modifier = Modifier.size(48.dp),
                 ) {
                     Icon(
@@ -134,8 +145,10 @@ fun ProductCard(
 
 @Composable
 fun AddedToCartFAB(
-    show: Boolean = true, navigationActions: MainNavActions
+    show: Boolean = true, 
+    navigationActions: MainNavActions
 ) {
+
     if (show) {
         ExtendedFloatingActionButton(
             onClick = navigationActions.navigateToCart,

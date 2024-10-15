@@ -1,10 +1,12 @@
 package com.example.parcial_tp3_grupo_1
 
 import android.annotation.SuppressLint
+import android.media.Rating
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
@@ -16,16 +18,20 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.parcial_tp3_grupo_1.model.Product
 import com.example.parcial_tp3_grupo_1.navigation.AppDestinations
 import com.example.parcial_tp3_grupo_1.navigation.DynamicTopBar
 import com.example.parcial_tp3_grupo_1.navigation.MainNavActions
 import com.example.parcial_tp3_grupo_1.navigation.MainRouteNavGraph
 import com.example.parcial_tp3_grupo_1.ui.components.AddedToCartFAB
 import com.example.parcial_tp3_grupo_1.ui.components.BottomNavBar
+import com.example.parcial_tp3_grupo_1.ui.components.ProductCard
 import com.example.parcial_tp3_grupo_1.ui.theme.ParcialTP3Grupo1Theme
 import kotlinx.coroutines.delay
 
 class MainActivity : ComponentActivity() {
+    private val mainActivityViewModel: MainActivityViewModel by viewModels()
+
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,28 +46,40 @@ class MainActivity : ComponentActivity() {
 
                 //Se utilizan para mostrar el boton cuando un elemento es añadido al carrito de manera rapida
                 var showFAB by remember { mutableStateOf(false) }
-                LaunchedEffect(showFAB) {
-                    if (showFAB) {
+                LaunchedEffect(mainActivityViewModel.showFAB.value) {
+                    if (mainActivityViewModel.showFAB.value) {
+                        showFAB = true
                         delay(3000L)
-                        showFAB = false;
+                        showFAB = false
                     }
                 }
 
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
-                    floatingActionButton = { AddedToCartFAB(showFAB, navigationActions = navigationActions)},
+                    floatingActionButton = {
+                        AddedToCartFAB(showFAB, navigationActions = navigationActions)
+//                        if(mainActivityViewModel.showFAB.value){
+//                            AddedToCartFAB(true, navigationActions = navigationActions)
+//                        }
+                    },
                     bottomBar = {
-                        val currentLocation = navController.currentBackStackEntryAsState().value?.destination?.route
+                        val currentLocation =
+                            navController.currentBackStackEntryAsState().value?.destination?.route
                         if (!navigationActions.shouldHideBottombar(currentLocation)) {
                             BottomNavBar(navigationActions = navigationActions)
                         }
                     },
                     topBar = {
-                        val currentLocation = navController.currentBackStackEntryAsState().value?.destination?.route
-                        DynamicTopBar(currentLocation, navigationActions.navigateToShop) // Se puede usar para ir a cualquier lado que se quiera ir
+                        val currentLocation =
+                            navController.currentBackStackEntryAsState().value?.destination?.route
+                        DynamicTopBar(
+                            currentLocation,
+                            navigationActions.navigateToShop
+                        ) // Se puede usar para ir a cualquier lado que se quiera ir
                     }
                 )
                 { innerPadding ->
+
                     MainRouteNavGraph(
                         modifier = Modifier.padding(innerPadding),
                         navController = navController,
