@@ -2,6 +2,7 @@ package com.example.parcial_tp3_grupo_1.screens.error
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -12,11 +13,11 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
@@ -32,13 +33,13 @@ fun ErrorScreen() {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0x34070707)) // Fondo con color especificado
+            .background(Color(0x34070707))
     ) {
         Column(
             modifier = Modifier
                 .width(335.dp)
                 .height(544.dp)
-                .paint(painterResource(id = R.drawable.pop_up_background))
+                .background(Color.White)
                 .padding(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
@@ -46,7 +47,8 @@ fun ErrorScreen() {
             Box(
                 modifier = Modifier
                     .size(48.dp)
-                    .align(Alignment.Start)
+                    .clickable {  }
+                    .align(Alignment.Start),
             ) {
                 Image(
                     painter = painterResource(id = R.drawable.cross),
@@ -88,10 +90,13 @@ fun ErrorScreen() {
                 onClick = { /* Acción del botón */ },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 30.dp)
+                    .padding(top = 30.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color(0xFF53B175)
+                ),
             ) {
                 Text(
-                    text = "Try Again",
+                    text = "Please Try Again",
                     fontFamily = FontFamily.Default,
                     fontWeight = FontWeight.Bold,
                     fontSize = 16.sp,

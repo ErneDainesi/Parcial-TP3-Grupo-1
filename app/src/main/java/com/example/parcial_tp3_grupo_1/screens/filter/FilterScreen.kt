@@ -1,6 +1,7 @@
 package com.example.parcial_tp3_grupo_1.screens.filter
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -18,7 +19,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.paint
-import androidx.compose.ui.graphics.BlendMode.Companion.Color
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
@@ -28,7 +28,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.parcial_tp3_grupo_1.R
-import java.util.logging.Filter
 
 @Preview
 @Composable
@@ -42,7 +41,7 @@ fun FilterScreen() {
             modifier = Modifier
                 .width(413.dp)
                 .height(657.dp)
-                .paint(painterResource(id = R.drawable.pop_up_background))
+                .background(Color.White)
                 .padding(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
@@ -67,7 +66,7 @@ fun FilterScreen() {
                     fontFamily = FontFamily.Default,
                     fontWeight = FontWeight.Bold,
                     fontSize = 16.sp,
-                    color = androidx.compose.ui.graphics.Color.Black,
+                    color = Color.Black,
                     modifier = Modifier.align(Alignment.Center)
                 )
             }
@@ -76,7 +75,7 @@ fun FilterScreen() {
                 fontFamily = FontFamily.Default,
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 20.sp,
-                color = androidx.compose.ui.graphics.Color.Black,
+                color = Color.Black,
                 modifier = Modifier
                     .padding(start = 15.dp, top = 20.dp)
                     .align(Alignment.Start)
@@ -90,7 +89,7 @@ fun FilterScreen() {
                 fontFamily = FontFamily.Default,
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 20.sp,
-                color = androidx.compose.ui.graphics.Color.Black,
+                color = Color.Black,
                 modifier = Modifier
                     .padding(start = 15.dp, top = 20.dp)
                     .align(Alignment.Start)
@@ -111,7 +110,7 @@ fun FilterScreen() {
                     fontFamily = FontFamily.Default,
                     fontWeight = FontWeight.Bold,
                     fontSize = 16.sp,
-                    color = androidx.compose.ui.graphics.Color.White
+                    color = Color.White
                 )
             }
         }

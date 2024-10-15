@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -78,6 +79,9 @@ fun OnboardingScreen() {
             )
             Button(
                 onClick = { /* Acción del botón */ },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color(0xFF53B175)
+                ),
                 modifier = Modifier
                     .width(353.dp)
                     .height(67.dp)
