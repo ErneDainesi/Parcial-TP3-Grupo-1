@@ -1,6 +1,7 @@
 package com.example.parcial_tp3_grupo_1.screens.product
 
 import android.util.Log
+import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
@@ -35,14 +36,18 @@ fun ProductDetailRoute(
     when {
         isLoading -> {
             // Loading
-            Text(text = "Loading product")
-//            CircularProgressIndicator()
+            Column {
+                Text(text = "Loading product")
+                CircularProgressIndicator()
+            }
         }
+
         errorMsg != null -> {
             // Error
             Text(text = "Error retrieving product")
             Log.e("error retrieving product", errorMsg!!)
         }
+
         product != null -> {
             val p = product!!
             Log.wtf("ppp", "p: $p")
@@ -52,7 +57,8 @@ fun ProductDetailRoute(
             )
         }
 
-        else ->{
+        else -> {
+            Text(text = "Product is null")
             Log.wtf("Else", "Product is null")
         }
 

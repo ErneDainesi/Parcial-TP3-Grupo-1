@@ -22,25 +22,15 @@ class ProductDetailViewModel(
     private val _errorMsg = mutableStateOf<String?>(null)
     val errorMsg: State<String?> = _errorMsg
 
-    fun getProd(id: Int) : Product{
-        viewModelScope.launch {
-            val response = fakeStoreService.getProductById(id)
-            _product.value = response
-        }
-        return product.value!!
-    }
 
 
     fun getProdById(id: Int) {
         _isLoading.value = true
         _errorMsg.value = null
-
         viewModelScope.launch {
             try {
                 val response = fakeStoreService.getProductById(id)
-                Log.wtf("ProductDetailViewModel", "response: $response")
                 if (response != null) {
-
                     _product.value = response
                     Log.wtf("PDV", "product.value: $product")
                 } else {
