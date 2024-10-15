@@ -42,9 +42,7 @@ import com.example.parcial_tp3_grupo_1.navigation.MainNavActions
 
 @Composable
 fun ProductCard(
-    product: Product,
-    onAddToCartClick: () -> Unit = { },
-    navigationActions: MainNavActions
+    product: Product, onAddToCartClick: () -> Unit, navigationActions: MainNavActions
 ) {
     Card(
         shape = RoundedCornerShape(16.dp),
@@ -56,8 +54,8 @@ fun ProductCard(
                 color = colorResource(id = R.color.border_item_card_color),
                 shape = RoundedCornerShape(16.dp)
             ),
+        onClick = { navigationActions.navigateToProductDetail(product.id) }
 
-        onClick = { /* redireccionar a detalle product */ }
     ) {
 
         Column(
@@ -66,6 +64,7 @@ fun ProductCard(
             modifier = Modifier
                 .background(color = Color.White)
                 .padding(8.dp)
+//              .size(173.dp, 248.dp) Figma size
                 .size(175.dp, 250.dp)
         ) {
             AsyncImage(
@@ -122,6 +121,8 @@ fun ProductCard(
                             )
                             .padding(8.dp)
                             .size(24.dp)
+
+
                     )
                 }
             }
@@ -133,8 +134,7 @@ fun ProductCard(
 
 @Composable
 fun AddedToCartFAB(
-    show: Boolean = true,
-    navigationActions: MainNavActions
+    show: Boolean = true, navigationActions: MainNavActions
 ) {
     if (show) {
         ExtendedFloatingActionButton(

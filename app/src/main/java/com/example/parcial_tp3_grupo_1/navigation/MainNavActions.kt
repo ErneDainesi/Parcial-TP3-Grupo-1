@@ -10,6 +10,7 @@ object AppDestinations {
     const val SHOP_ROUTE = "shop"
     const val SIGNIN_ROUTE = "signin"
     const val SIGNUP_ROUTE = "signup"
+    const val PROD_DETAIL_ROUTE = "product/{id}"
     const val SPLASH_ROUTE = "splash"
     const val ONBOARDING_ROUTE = "onboarding"
 }
@@ -48,6 +49,14 @@ class MainNavActions(
     }
     val navigateToOnboarding: () -> Unit = {
         navController.navigate(AppDestinations.ONBOARDING_ROUTE)
+    }
+
+    val navigateToProductDetail: (id: Int) -> Unit = { id ->
+        navController.navigate(
+            AppDestinations.PROD_DETAIL_ROUTE.replace(
+                oldValue = "{id}", newValue = id.toString()
+            )
+        )
     }
 
     fun shouldHideBottombar(location: String?): Boolean {
