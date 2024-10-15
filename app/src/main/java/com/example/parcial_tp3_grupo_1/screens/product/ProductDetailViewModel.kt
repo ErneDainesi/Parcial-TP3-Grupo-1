@@ -1,5 +1,6 @@
 package com.example.parcial_tp3_grupo_1.screens.product
 
+import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -21,17 +22,27 @@ class ProductDetailViewModel(
     private val _errorMsg = mutableStateOf<String?>(null)
     val errorMsg: State<String?> = _errorMsg
 
+    fun getProd(id: Int) : Product{
+        viewModelScope.launch {
+            val response = fakeStoreService.getProductById(id)
+            _product.value = response
+        }
+        return product.value!!
+    }
+
+
     fun getProdById(id: Int) {
         _isLoading.value = true
         _errorMsg.value = null
 
-
         viewModelScope.launch {
             try {
                 val response = fakeStoreService.getProductById(id)
-
+                Log.wtf("ProductDetailViewModel", "response: $response")
                 if (response != null) {
+
                     _product.value = response
+                    Log.wtf("PDV", "product.value: $product")
                 } else {
                     _errorMsg.value = "No se encontró el producto"
                 }

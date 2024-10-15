@@ -69,49 +69,48 @@ import com.example.parcial_tp3_grupo_1.shared.FakeStoreService
 import com.example.parcial_tp3_grupo_1.ui.components.BasicButton
 import org.jetbrains.annotations.Async
 
+//@Composable
+//fun ProductDetailScreen(
+////    productId: Int,
+//    product: Product,
+//    navigationActions: MainNavActions,
+////    viewModel: ProductDetailViewModel = ProductDetailViewModel(FakeStoreService(FakeStoreHelper()))
+//) {
+
+//    val product by viewModel.product
+//    val isLoading by viewModel.isLoading
+//    val errorMsg by viewModel.errorMsg
+//
+//    LaunchedEffect(Unit) {
+//        viewModel.getProdById(productId)
+//    }
+//
+//    when {
+//        isLoading -> {
+//            CircularProgressIndicator()
+//        }
+//
+//        errorMsg != null -> {
+//            Text(text = errorMsg!!)
+//        }
+//
+//        product != null -> {
+//            ProductDetailView(product = product!!, navigationActions = navigationActions)
+//        }
+//
+//        else -> {
+//            Column{
+//                Text(text = productId.toString())
+//                Text(text = "No se encontró el producto")
+//            }
+//        }
+//
+//
+//    }
+//}
+
 @Composable
 fun ProductDetailScreen(
-    productId: Int,
-    navigationActions: MainNavActions,
-    viewModel: ProductDetailViewModel = ProductDetailViewModel(FakeStoreService(FakeStoreHelper()))
-) {
-
-    val product by viewModel.product
-    val isLoading by viewModel.isLoading
-    val errorMsg by viewModel.errorMsg
-
-    LaunchedEffect(Unit) {
-        viewModel.getProdById(productId)
-    }
-
-    when {
-        isLoading -> {
-            CircularProgressIndicator()
-        }
-
-        errorMsg != null -> {
-            Text(text = errorMsg!!)
-        }
-
-        product != null -> {
-            ProductDetailView(product = product!!, navigationActions = navigationActions)
-        }
-
-        else -> {
-            Column{
-                Text(text = productId.toString())
-                Text(text = "No se encontró el producto")
-            }
-        }
-
-
-    }
-
-
-}
-
-@Composable
-fun ProductDetailView(
     product: Product, navigationActions: MainNavActions
 ) {
     LazyColumn(modifier = Modifier.fillMaxSize()) {
@@ -123,7 +122,7 @@ fun ProductDetailView(
 //                .fillMaxWidth()
 //                .height(200.dp),
 //        )
-        item{
+        item {
             Image(
                 painter = painterResource(id = R.drawable.banana),
                 contentDescription = product.image,
@@ -217,7 +216,9 @@ fun ProductDetailView(
                 AccordionComponent(title = "Review", body = "", rating = product.rating)
 
                 Row(verticalAlignment = Alignment.Bottom) {
-                    BasicButton(text = "Add to Basket", onClick = { navigationActions.navigateToCart() })
+                    BasicButton(
+                        text = "Add to Basket",
+                        onClick = { navigationActions.navigateToCart() })
                 }
             }
         }
