@@ -18,17 +18,21 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Divider
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.example.parcial_tp3_grupo_1.R
 import com.example.parcial_tp3_grupo_1.model.Product
 
 @Composable
@@ -73,17 +77,19 @@ fun CartItem(
                 )
                 QuantityButtons()
             }
-            Row(verticalAlignment = Alignment.CenterVertically) {
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                IconButton (onClick = {}) {
+                    Image(
+                        painter = painterResource(id = R.drawable.close_cart_item),
+                        contentDescription = "Remove from cart",
+                        modifier = Modifier.size(10.dp)
+                    )
+                }
                 Text(
                     text = "$${product.price}",
                     fontSize = 12.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.Black
-                )
-                Icon(
-                    imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
-                    tint = Color.Black,
-                    contentDescription = "Go to product arrow"
                 )
             }
         }
